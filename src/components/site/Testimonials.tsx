@@ -99,12 +99,7 @@ export function Testimonials() {
           </h2>
         </div>
 
-        <div className="md:hidden">
-          <Slider groupSize={2} gridClass="grid grid-cols-1 gap-5" />
-        </div>
-        <div className="hidden md:block">
-          <Slider groupSize={4} gridClass="grid grid-cols-2 gap-6 lg:gap-8" />
-        </div>
+        <Slider groupSize={2} gridClass="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" />
       </div>
     </section>
   );
