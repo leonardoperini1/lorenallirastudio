@@ -32,7 +32,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-foreground/80">
               <li>Rua das Pétalas, 142 — Pinheiros</li>
               <li>São Paulo · SP</li>
-              <li>contato@liricaeletra.com</li>
+              <li>contato@lorenallira.com</li>
               <li>Seg–Sex · 10h às 19h</li>
             </ul>
           </div>
