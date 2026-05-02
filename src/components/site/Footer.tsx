@@ -9,7 +9,7 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img src={monogram} alt="" className="h-9 w-9" width={36} height={36} />
               <span className="font-serif text-xl tracking-luxury">
-                Lírica <span className="text-primary">&</span> Letra
+                Lorena <span className="text-primary">LL</span>ira
               </span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed font-light max-w-xs">
