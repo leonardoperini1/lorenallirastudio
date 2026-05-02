@@ -5,6 +5,7 @@ import monogram from "@/assets/ll-monogram.png";
 const links = [
   { href: "#inicio", label: "Início" },
   { href: "#portfolio", label: "Portfólio" },
+  { href: "#depoimentos", label: "Depoimentos" },
   { href: "#planos", label: "Planos" },
   { href: "#como-funciona", label: "Como funciona" },
   { href: "#contato", label: "Contato" },
