@@ -1,0 +1,78 @@
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import monogram from "@/assets/ll-monogram.png";
+
+const links = [
+  { href: "#inicio", label: "Início" },
+  { href: "#portfolio", label: "Portfólio" },
+  { href: "#planos", label: "Planos" },
+  { href: "#como-funciona", label: "Como funciona" },
+  { href: "#contato", label: "Contato" },
+];
+
+const WA = "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20composi%C3%A7%C3%A3o%20personalizada";
+
+export function Header() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+  }, [open]);
+
+  return (
+    <header className="glass-header fixed inset-x-0 top-0 z-50">
+      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-6 md:px-10 lg:px-16">
+        <a href="#inicio" className="flex items-center gap-3">
+          <img src={monogram} alt="Lírica & Letra" className="h-10 w-10" width={40} height={40} />
+          <span className="font-serif text-xl tracking-luxury text-foreground hidden sm:inline">
+            Lírica <span className="text-primary">&</span> Letra
+          </span>
+        </a>
+
+        <nav className="hidden lg:flex items-center gap-10">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-[0.78rem] tracking-editorial uppercase font-medium text-foreground/80 hover:text-primary transition-colors duration-300"
+            >
+              {l.label}
+            </a>
+          ))}
+        </nav>
+
+        <a href={WA} target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex btn-primary text-[0.72rem] !py-3 !px-6">
+          Falar no WhatsApp
+        </a>
+
+        <button
+          className="lg:hidden flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20"
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {open && (
+        <div className="lg:hidden absolute inset-x-0 top-20 glass-header border-t border-foreground/5 px-6 py-8 animate-fade-in">
+          <nav className="flex flex-col gap-6">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="text-base tracking-luxury uppercase font-medium text-foreground"
+              >
+                {l.label}
+              </a>
+            ))}
+            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary mt-4 self-start">
+              Falar no WhatsApp
+            </a>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}
