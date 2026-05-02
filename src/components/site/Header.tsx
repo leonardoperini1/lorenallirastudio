@@ -23,9 +23,9 @@ export function Header() {
     <header className="glass-header fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-6 md:px-10 lg:px-16">
         <a href="#inicio" className="flex items-center gap-3">
-          <img src={monogram} alt="Lírica & Letra" className="h-10 w-10" width={40} height={40} />
-          <span className="font-serif text-xl tracking-luxury text-foreground hidden sm:inline">
-            Lírica <span className="text-primary">&</span> Letra
+          <img src={monogram} alt="Lorena LLira" className="h-10 w-10" width={40} height={40} />
+          <span className="font-serif text-xl tracking-luxury text-foreground">
+            Lorena <span className="text-primary">LL</span>ira
           </span>
         </a>
 
@@ -41,7 +41,7 @@ export function Header() {
           ))}
         </nav>
 
-        <a href={WA} target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex btn-primary text-[0.72rem] !py-3 !px-6">
+        <a href={WA} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-flex btn-primary text-[0.72rem] !py-3 !px-6">
           Falar no WhatsApp
         </a>
 
