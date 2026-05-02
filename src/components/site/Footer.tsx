@@ -39,7 +39,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border/60 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-muted-foreground tracking-luxury">
-          <span>© 2026 Lírica & Letra. Todas as composições registradas.</span>
+          <span>© 2026 Lorena LLira. Todas as composições registradas.</span>
           <span className="italic font-serif text-base">"A música é o que os sentimentos soam quando ousam falar."</span>
         </div>
       </div>
