@@ -18,7 +18,7 @@ const plans = [
     featured: false,
   },
   {
-    name: "Sonata",
+    name: "Intermezzo",
     price: "R$ 1.690",
     tagline: "O equilíbrio perfeito — escolha da casa",
     features: [
@@ -30,11 +30,11 @@ const plans = [
       "Entrega em 7 dias",
       "Videoclipe com letras (1080p)",
     ],
-    cta: "Escolher Sonata",
+    cta: "Escolher Intermezzo",
     featured: true,
   },
   {
-    name: "Concerto",
+    name: "Sonata",
     price: "R$ 2.890",
     tagline: "Produção orquestral completa",
     features: [
@@ -47,7 +47,7 @@ const plans = [
       "Videoclipe cinematográfico 4K",
       "Sessão presencial de gravação",
     ],
-    cta: "Solicitar Concerto",
+    cta: "Solicitar Sonata",
     featured: false,
   },
 ];
