@@ -6,11 +6,11 @@ export function Hero() {
   return (
     <section id="inicio" className="relative min-h-screen pt-28 overflow-hidden">
       {/* Painted background image, soft */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
         <img
           src={heroRose}
           alt="Rosa pintada feita de partituras musicais"
-          className="h-full w-full object-cover opacity-90"
+          className="wind-bg h-full w-full object-cover opacity-90"
           width={1920}
           height={1280}
         />
