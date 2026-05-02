@@ -25,13 +25,13 @@ export function Hero() {
           <h1 className="font-serif text-[3.25rem] sm:text-[4.5rem] lg:text-[6.25rem] xl:text-[7rem] leading-[0.98] tracking-[-0.02em] text-foreground">
             Transforme<br />
             <em className="italic font-light text-primary">sentimentos</em><br />
-            em música.
+            em música
           </h1>
 
           <p className="mt-8 max-w-xl text-lg lg:text-xl leading-[1.7] text-foreground/75 font-light tracking-luxury">
-            Composições personalizadas, escritas à mão e gravadas em estúdio para
-            eternizar momentos únicos — casamentos, pedidos, aniversários e
-            despedidas que merecem uma trilha sonora própria.
+            Composições personalizadas, escritas à mão e em todos os gêneros
+            musicais para eternizar os seus momentos do seu jeito — casamentos,
+            pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
           </p>
 
           <div className="mt-12 flex flex-wrap items-center gap-5">
