@@ -9,7 +9,7 @@ export function Footer() {
             <div className="flex items-center gap-3 mb-4">
               <img src={monogram} alt="" className="h-9 w-9" width={36} height={36} />
               <span className="font-serif text-xl tracking-luxury">
-                Lírica <span className="text-primary">&</span> Letra
+                Lorena <span className="text-primary">LL</span>ira
               </span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed font-light max-w-xs">
@@ -32,14 +32,14 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-foreground/80">
               <li>Rua das Pétalas, 142 — Pinheiros</li>
               <li>São Paulo · SP</li>
-              <li>contato@liricaeletra.com</li>
+              <li>contato@lorenallira.com</li>
               <li>Seg–Sex · 10h às 19h</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-border/60 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-muted-foreground tracking-luxury">
-          <span>© 2026 Lírica & Letra. Todas as composições registradas.</span>
+          <span>© 2026 Lorena LLira. Todas as composições registradas.</span>
           <span className="italic font-serif text-base">"A música é o que os sentimentos soam quando ousam falar."</span>
         </div>
       </div>
