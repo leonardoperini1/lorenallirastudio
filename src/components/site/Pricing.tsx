@@ -52,11 +52,11 @@ export function Pricing() {
         <div className="reveal text-center max-w-3xl mx-auto mb-20 lg:mb-24">
           <span className="eyebrow block mb-6">Planos & Investimento</span>
           <h2 className="font-serif text-5xl lg:text-7xl leading-[1] tracking-[-0.015em]">
-            Três caminhos.<br />Uma <em className="italic font-light text-primary">só obra</em> sua.
+            Três caminhos.<br />Uma <em className="italic font-light text-primary">só obra</em> sua
           </h2>
           <p className="mt-8 text-lg leading-[1.8] text-foreground/70 font-light">
             Pacotes pensados para diferentes momentos da vida. Toda canção é
-            composta de forma exclusiva, autoral e sob medida.
+            composta de forma exclusiva, autoral e sob medida
           </p>
         </div>
 
