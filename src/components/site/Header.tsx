@@ -41,7 +41,7 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Este botão permanece visível apenas em telas grandes (Desktop) */}
+        {/* CTA visível APENAS em Desktop (lg:inline-flex) */}
         <a 
           href={waLink()} 
           target="_blank" 
@@ -60,7 +60,6 @@ export function Header() {
         </button>
       </div>
 
-      {/* Menu Mobile - O botão de WhatsApp foi removido deste bloco */}
       {open && (
         <div className="lg:hidden absolute inset-x-0 top-20 glass-header border-t border-foreground/5 px-6 py-8 animate-fade-in">
           <nav className="flex flex-col gap-6">
@@ -74,8 +73,7 @@ export function Header() {
                 {l.label}
               </a>
             ))}
-            {/* O BOTÃO FOI REMOVIDO DAQUI PARA MANTER O FOCO NO CONTEÚDO NO MOBILE */}
-          </nav>
+         </nav>
         </div>
       )}
     </header>
