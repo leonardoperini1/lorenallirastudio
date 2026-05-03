@@ -1,6 +1,7 @@
 import heroRose from "@/assets/hero-rose.jpg";
+import { waLink } from "@/lib/whatsapp";
 
-const WA = "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20composi%C3%A7%C3%A3o%20personalizada";
+const WA = waLink();
 
 export function Hero() {
   return (

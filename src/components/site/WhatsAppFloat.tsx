@@ -1,9 +1,9 @@
-const WA = "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20vim%20pelo%20site";
+import { waLink } from "@/lib/whatsapp";
 
 export function WhatsAppFloat() {
   return (
     <a
-      href={WA}
+      href={waLink()}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar no WhatsApp"

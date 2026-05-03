@@ -1,6 +1,7 @@
 import ctaImg from "@/assets/cta-dark-rose.jpg";
+import { waLink } from "@/lib/whatsapp";
 
-const WA = "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20quero%20encomendar%20minha%20m%C3%BAsica";
+const WA = waLink();
 
 export function FinalCTA() {
   return (
