@@ -37,14 +37,14 @@ export function Portfolio() {
     onSelect();
   }, [embla]);
 
-  // Auto-advance every 3s while no audio has been played
+  // Auto-advance every 6s while no audio has been played
   useEffect(() => {
     if (!embla) return;
     const start = () => {
       if (autoplayRef.current) clearInterval(autoplayRef.current);
       autoplayRef.current = setInterval(() => {
         if (!userInteractedRef.current) embla.scrollNext();
-      }, 3000);
+      }, 6000);
     };
     start();
     return () => {
@@ -103,9 +103,7 @@ export function Portfolio() {
           <div className="lg:col-span-6 lg:col-start-7 lg:pt-8">
             <p className="text-lg leading-[1.8] text-foreground/75 font-light">
               Cada peça nasce de uma conversa, segue por um caderno de rascunhos e
-              termina em uma música acompanhada de um sorriso. O que você ouve abaixo
-              são recortes de obras inteiras — são para inspiração, pois fazemos cada
-              composição personalizada.
+              termina em uma música acompanhada de um sorriso. Inspire-se
             </p>
           </div>
         </div>
