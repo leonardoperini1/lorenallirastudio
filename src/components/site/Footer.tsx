@@ -24,7 +24,6 @@ export function Footer() {
               <li><a href="#portfolio" className="hover:text-primary transition-colors">Portfólio</a></li>
               <li><a href="#planos" className="hover:text-primary transition-colors">Planos</a></li>
               <li><a href="#como-funciona" className="hover:text-primary transition-colors">Como funciona</a></li>
-              <li><a href="#contato" className="hover:text-primary transition-colors">Contato</a></li>
             </ul>
           </div>
 
@@ -38,7 +37,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-primary transition-colors"
                 >
-                  WhatsApp: 19 – 9 8283 1700
+                  WhatsApp: (19) 98283-1700
                 </a>
               </li>
               <li>
