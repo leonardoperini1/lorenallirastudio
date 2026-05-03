@@ -4,20 +4,20 @@ const steps = [
   {
     icon: MessageCircle,
     n: "01",
-    title: "Conversa íntima",
-    text: "Tudo começa com uma chamada de 30 minutos. Você conta a história, mostra fotos, lembra cheiros e palavras. Nós escutamos.",
+    title: "Conversa próxima",
+    text: "Tudo começa com uma chamada de 30 minutos. Você conta a história, mostra fotos, lembra cheiros e palavras, e nós só escutamos",
   },
   {
     icon: Feather,
     n: "02",
     title: "Escrita & melodia",
-    text: "Cada criação é única — podendo ser desenvolvida em diferentes idiomas e estilos, com elementos como mensagens faladas e variações da própria canção.",
+    text: "Cada criação é única — podendo ser desenvolvida em diferentes idiomas e estilos, com elementos como mensagens faladas e variações da própria canção",
   },
   {
     icon: Disc3,
     n: "03",
     title: "Estúdio & entrega",
-    text: "A entrega pode incluir versões adicionais, playback´s e a letra apresentada como uma lembrança física, emoldurada em forma de carta ou cartão.",
+    text: "A entrega pode incluir versões adicionais, playback´s e a letra apresentada como uma lembrança física, emoldurada em forma de carta ou cartão",
   },
 ];
 
@@ -28,7 +28,7 @@ export function HowItWorks() {
         <div className="reveal max-w-3xl mb-20 lg:mb-28">
           <span className="eyebrow block mb-6">Como funciona</span>
           <h2 className="font-serif text-5xl lg:text-7xl leading-[1] tracking-[-0.015em]">
-            Do primeiro suspiro<br />à <em className="italic font-light text-primary">trilha final</em>.
+            Do primeiro suspiro<br />à <em className="italic font-light text-primary">trilha final</em>
           </h2>
         </div>
 
