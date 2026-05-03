@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import monogram from "@/assets/ll-monogram.png";
-import { waLink } from "@/lib/whatsapp";
 
 const links = [
   { href: "#inicio", label: "Início" },
@@ -41,16 +40,6 @@ export function Header() {
           ))}
         </nav>
 
-        {/* CTA visível APENAS em Desktop (lg:inline-flex) */}
-        <a 
-          href={waLink()} 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="hidden lg:inline-flex btn-primary text-[0.72rem] !py-3 !px-6"
-        >
-          Falar no WhatsApp
-        </a>
-
         <button
           className="lg:hidden flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20"
           onClick={() => setOpen(!open)}
@@ -73,7 +62,7 @@ export function Header() {
                 {l.label}
               </a>
             ))}
-         </nav>
+          </nav>
         </div>
       )}
     </header>
