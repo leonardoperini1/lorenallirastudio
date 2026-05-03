@@ -41,6 +41,7 @@ export function Header() {
           ))}
         </nav>
 
+        {/* Este botão permanece visível apenas em telas grandes (Desktop) */}
         <a href={waLink()} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-flex btn-primary text-[0.72rem] !py-3 !px-6">
           Falar no WhatsApp
         </a>
@@ -67,9 +68,7 @@ export function Header() {
                 {l.label}
               </a>
             ))}
-            <a href={waLink()} target="_blank" rel="noopener noreferrer" className="btn-primary mt-4 self-start">
-              Falar no WhatsApp
-            </a>
+            {/* O botão de WhatsApp foi removido daqui para não aparecer no Mobile, conforme solicitado */}
           </nav>
         </div>
       )}
