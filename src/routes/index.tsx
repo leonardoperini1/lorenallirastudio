@@ -3,6 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { Portfolio } from "@/components/site/Portfolio";
 import { HowItWorks } from "@/components/site/HowItWorks";
+import { Pricing } from "@/components/site/Pricing";
 import { Testimonials } from "@/components/site/Testimonials";
 import { FinalCTA } from "@/components/site/FinalCTA";
 import { Footer } from "@/components/site/Footer";
@@ -34,6 +35,7 @@ function Index() {
       <Hero />
       <Portfolio />
       <HowItWorks />
+      <Pricing />
       <Testimonials />
       <FinalCTA />
       <Footer />
