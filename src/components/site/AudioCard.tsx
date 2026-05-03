@@ -1,15 +1,18 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Play, Pause } from "lucide-react";
 
 interface Props {
+  id: string;
   cover: string;
   title: string;
   occasion: string;
   src?: string;
+  isPlaying: boolean;
+  onPlay: (id: string) => void;
+  onPause: (id: string) => void;
 }
 
-export function AudioCard({ cover, title, occasion, src }: Props) {
-  const [playing, setPlaying] = useState(false);
+export function AudioCard({ id, cover, title, occasion, src, isPlaying, onPlay, onPause }: Props) {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -23,7 +26,7 @@ export function AudioCard({ cover, title, occasion, src }: Props) {
       setDuration(a.duration || 0);
       setProgress(a.duration ? (a.currentTime / a.duration) * 100 : 0);
     };
-    const onEnd = () => { setPlaying(false); setProgress(0); setCurrent(0); };
+    const onEnd = () => { onPause(id); setProgress(0); setCurrent(0); };
     const onMeta = () => setDuration(a.duration || 0);
     a.addEventListener("timeupdate", onTime);
     a.addEventListener("ended", onEnd);
@@ -33,13 +36,27 @@ export function AudioCard({ cover, title, occasion, src }: Props) {
       a.removeEventListener("ended", onEnd);
       a.removeEventListener("loadedmetadata", onMeta);
     };
-  }, []);
+  }, [id, onPause]);
 
-  const toggle = () => {
+  // Sync external isPlaying state with the <audio> element
+  useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
-    if (playing) { a.pause(); setPlaying(false); }
-    else { a.play(); setPlaying(true); }
+    if (isPlaying) {
+      const p = a.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    } else {
+      a.pause();
+      if (!progress) {
+        a.currentTime = 0;
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying]);
+
+  const toggle = () => {
+    if (isPlaying) onPause(id);
+    else onPlay(id);
   };
 
   const fmt = (s: number) => {
@@ -74,9 +91,9 @@ export function AudioCard({ cover, title, occasion, src }: Props) {
           <button
             onClick={toggle}
             className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
-            aria-label={playing ? "Pausar" : "Tocar"}
+            aria-label={isPlaying ? "Pausar" : "Tocar"}
           >
-            {playing ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
+            {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
           </button>
         </div>
 

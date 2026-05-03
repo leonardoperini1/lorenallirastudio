@@ -11,13 +11,13 @@ const steps = [
     icon: Feather,
     n: "02",
     title: "Escrita & melodia",
-    text: "Compomos letra e melodia à mão, em rascunhos. Você recebe uma prévia em voz e violão para ajustar cada verso.",
+    text: "Cada criação é única — podendo ser desenvolvida em diferentes idiomas e estilos, com elementos como mensagens faladas e variações da própria canção.",
   },
   {
     icon: Disc3,
     n: "03",
     title: "Estúdio & entrega",
-    text: "Gravamos em estúdio com músicos reais, mixamos, masterizamos. Você recebe áudio em alta, partituras e letra emoldurada.",
+    text: "A entrega pode incluir versões adicionais, playback´s e a letra apresentada como uma lembrança física, emoldurada em forma de carta ou cartão.",
   },
 ];
 

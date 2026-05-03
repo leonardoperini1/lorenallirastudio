@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import heroRose from "@/assets/hero-rose.jpg";
@@ -11,19 +11,23 @@ import p5 from "@/assets/portfolio-5.jpg";
 import p6 from "@/assets/portfolio-6.jpg";
 
 const tracks = [
-  { cover: p3, title: "Eu te vi", occasion: "Dia das mães", src: "/audio/eu-te-vi.mp3" },
-  { cover: p1, title: "LL para vereadora", occasion: "Jingle", src: "/audio/ll-para-vereadora.mp3" },
-  { cover: p5, title: "É um menino!", occasion: "Chá revelação", src: "/audio/e-um-menino.mp3" },
-  { cover: p4, title: "Rafaella", occasion: "Debutante", src: "/audio/rafaella.mp3" },
-  { cover: p6, title: "Por você", occasion: "Poesia musicada", src: "/audio/por-voce.mp3" },
-  { cover: p2, title: "Casamento dos sonhos", occasion: "Casamento", src: "/audio/casamento-dos-sonhos.mp3" },
+  { id: "eu-te-vi", cover: p3, title: "Eu te vi", occasion: "Dia das mães", src: "/audio/eu-te-vi.mp3" },
+  { id: "ll-vereadora", cover: p1, title: "LL para vereadora", occasion: "Jingle", src: "/audio/ll-para-vereadora.mp3" },
+  { id: "e-um-menino", cover: p5, title: "É um menino!", occasion: "Chá revelação", src: "/audio/e-um-menino.mp3" },
+  { id: "rafaella", cover: p4, title: "Rafaella", occasion: "Debutante", src: "/audio/rafaella.mp3" },
+  { id: "por-voce", cover: p6, title: "Por você", occasion: "Poesia musicada", src: "/audio/por-voce.mp3" },
+  { id: "casamento", cover: p2, title: "Casamento dos sonhos", occasion: "Casamento", src: "/audio/casamento-dos-sonhos.mp3" },
 ];
 
 export function Portfolio() {
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: "start" });
   const [selected, setSelected] = useState(0);
   const [snaps, setSnaps] = useState<number[]>([]);
+  const [playingId, setPlayingId] = useState<string | null>(null);
+  const userInteractedRef = useRef(false);
+  const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // Build embla state
   useEffect(() => {
     if (!embla) return;
     const onSelect = () => setSelected(embla.selectedScrollSnap());
@@ -33,9 +37,56 @@ export function Portfolio() {
     onSelect();
   }, [embla]);
 
+  // Auto-advance every 3s while no audio has been played
+  useEffect(() => {
+    if (!embla) return;
+    const start = () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+      autoplayRef.current = setInterval(() => {
+        if (!userInteractedRef.current) embla.scrollNext();
+      }, 3000);
+    };
+    start();
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+    };
+  }, [embla]);
+
+  // When slide changes & user has played audio, sync playback to current slide.
+  useEffect(() => {
+    if (!embla) return;
+    const onSelect = () => {
+      if (!userInteractedRef.current) return;
+      const idx = embla.selectedScrollSnap();
+      const next = tracks[idx];
+      if (next) setPlayingId(next.id);
+    };
+    embla.on("select", onSelect);
+    return () => {
+      embla.off("select", onSelect);
+    };
+  }, [embla]);
+
+  const handlePlay = (id: string) => {
+    userInteractedRef.current = true;
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+    setPlayingId(id);
+    // also align slide to the played track
+    const idx = tracks.findIndex((t) => t.id === id);
+    if (idx >= 0 && embla && embla.selectedScrollSnap() !== idx) {
+      embla.scrollTo(idx);
+    }
+  };
+
+  const handlePause = (id: string) => {
+    setPlayingId((cur) => (cur === id ? null : cur));
+  };
+
   return (
     <section id="portfolio" className="relative py-32 lg:py-44 overflow-hidden">
-      {/* subtle moving background */}
       <div className="absolute inset-0 -z-10 opacity-[0.18] pointer-events-none">
         <img src={heroRose} alt="" className="wind-bg h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
@@ -64,10 +115,15 @@ export function Portfolio() {
             <div className="flex -ml-6 lg:-ml-8">
               {tracks.map((t) => (
                 <div
-                  key={t.title}
+                  key={t.id}
                   className="pl-6 lg:pl-8 shrink-0 grow-0 basis-full md:basis-1/2 lg:basis-1/3"
                 >
-                  <AudioCard {...t} />
+                  <AudioCard
+                    {...t}
+                    isPlaying={playingId === t.id}
+                    onPlay={handlePlay}
+                    onPause={handlePause}
+                  />
                 </div>
               ))}
             </div>

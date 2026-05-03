@@ -1,4 +1,5 @@
 import monogram from "@/assets/ll-monogram.png";
+import { waLink } from "@/lib/whatsapp";
 
 export function Footer() {
   return (
@@ -28,19 +29,32 @@ export function Footer() {
           </div>
 
           <div>
-            <div className="text-[0.65rem] tracking-editorial uppercase text-primary mb-4">Atelier</div>
+            <div className="text-[0.65rem] tracking-editorial uppercase text-primary mb-4">Contato</div>
             <ul className="space-y-2 text-sm text-foreground/80">
-              <li>Rua das Pétalas, 142 — Pinheiros</li>
-              <li>São Paulo · SP</li>
-              <li>contato@lorenallira.com</li>
-              <li>Seg–Sex · 10h às 19h</li>
+              <li>
+                <a
+                  href={waLink()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
+                  WhatsApp: 19 – 9 8283 1700
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:personalizesuatrilha@gmail.com"
+                  className="hover:text-primary transition-colors"
+                >
+                  personalizesuatrilha@gmail.com
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-border/60 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-muted-foreground tracking-luxury">
+        <div className="border-t border-border/60 pt-8 text-xs text-muted-foreground tracking-luxury">
           <span>© 2026 Lorena LLira. Todas as composições registradas.</span>
-          <span className="italic font-serif text-base">"A música é o que os sentimentos soam quando ousam falar."</span>
         </div>
       </div>
     </footer>
