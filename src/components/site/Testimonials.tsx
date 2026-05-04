@@ -80,7 +80,7 @@ export function Testimonials() {
   }, [embla, paused]);
 
   return (
-    <section id="depoimentos" className="relative py-32 lg:py-44 bg-muted/40">
+    <section id="depoimentos" className="relative py-[100px] bg-muted/40">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
         <div className="reveal text-center max-w-3xl mx-auto mb-16 lg:mb-20">
           <span className="eyebrow block mb-6">Depoimentos</span>

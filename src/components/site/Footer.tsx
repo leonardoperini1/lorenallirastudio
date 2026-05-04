@@ -3,7 +3,7 @@ import { waLink } from "@/lib/whatsapp";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/60 py-16 lg:py-20">
+    <footer className="border-t border-border/60 py-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
         <div className="grid md:grid-cols-3 gap-10 mb-12">
           <div>
@@ -53,7 +53,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-border/60 pt-8 text-xs text-muted-foreground tracking-luxury">
-          <span>© 2026 Lorena LLira. Todas as composições registradas.</span>
+          <span>© 2026 Lorena LLira. Copyright — direitos reservados.</span>
         </div>
       </div>
     </footer>
