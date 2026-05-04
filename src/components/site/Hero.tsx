@@ -52,7 +52,9 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hidden lg:block lg:col-span-4 xl:col-span-5" />
+          <div className="hidden lg:block lg:col-span-5 h-[600px] xl:h-[700px]">
+            <FlowerWindEffect />
+          </div>
         </div>
       </div>
 
