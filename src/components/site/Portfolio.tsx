@@ -52,14 +52,13 @@ export function Portfolio() {
     };
   }, [embla]);
 
-  // When slide changes & user has played audio, sync playback to current slide.
+  // When slide changes, pause any currently playing track.
+  // The next track stays paused (Play button visible) until the user explicitly plays it.
   useEffect(() => {
     if (!embla) return;
     const onSelect = () => {
       if (!userInteractedRef.current) return;
-      const idx = embla.selectedScrollSnap();
-      const next = tracks[idx];
-      if (next) setPlayingId(next.id);
+      setPlayingId(null);
     };
     embla.on("select", onSelect);
     return () => {
@@ -86,7 +85,7 @@ export function Portfolio() {
   };
 
   return (
-    <section id="portfolio" className="relative py-32 lg:py-44 overflow-hidden">
+    <section id="portfolio" className="relative py-[100px] overflow-hidden">
       <div className="absolute inset-0 -z-10 opacity-[0.18] pointer-events-none">
         <img src={heroRose} alt="" className="wind-bg h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />

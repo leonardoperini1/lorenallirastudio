@@ -47,7 +47,7 @@ const plans = [
 
 export function Pricing() {
   return (
-    <section id="planos" className="relative py-32 lg:py-44 bg-muted/40">
+    <section id="planos" className="relative py-[100px] bg-muted/40">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
         <div className="reveal text-center max-w-3xl mx-auto mb-20 lg:mb-24">
           <span className="eyebrow block mb-6">Planos & Investimento</span>

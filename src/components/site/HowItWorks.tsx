@@ -23,7 +23,7 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section id="como-funciona" className="relative py-32 lg:py-44">
+    <section id="como-funciona" className="relative py-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
         <div className="reveal max-w-3xl mb-20 lg:mb-28">
           <span className="eyebrow block mb-6">Como funciona</span>

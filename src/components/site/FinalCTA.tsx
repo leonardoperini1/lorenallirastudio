@@ -5,7 +5,7 @@ const WA = waLink();
 
 export function FinalCTA() {
   return (
-    <section id="contato" className="relative isolate py-24 lg:py-40 overflow-hidden">
+    <section id="contato" className="relative isolate py-[100px] overflow-hidden">
       {/* Full-bleed immersive background */}
       <div className="absolute inset-0 -z-10">
         <img

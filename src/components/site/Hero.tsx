@@ -5,7 +5,7 @@ const WA = waLink();
 
 export function Hero() {
   return (
-    <section id="inicio" className="relative min-h-[110vh] lg:min-h-screen pt-32 pb-20 overflow-hidden flex flex-col justify-center">
+    <section id="inicio" className="relative min-h-[110vh] lg:min-h-screen pt-[100px] pb-[100px] overflow-hidden flex flex-col justify-center">
       {/* Painted background image, soft */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <img
@@ -50,7 +50,7 @@ export function Hero() {
               {[
                 ["+ 380", "composições autorais"],
                 ["7 dias", "entrega média"],
-                ["100%", "feito à mão"],
+                ["100%", "original"],
               ].map(([n, l]) => (
                 <div key={l} className="flex flex-col gap-1">
                   <div className="font-serif text-3xl xl:text-4xl text-foreground">{n}</div>
