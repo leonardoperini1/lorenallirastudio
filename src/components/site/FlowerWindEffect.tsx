@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import heroRose from "@/assets/hero-rose.jpg";
 
-const MAX_OFFSET = 25;
+const MAX_OFFSET = 15;
 
 export function FlowerWindEffect() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -67,8 +67,8 @@ export function FlowerWindEffect() {
       const dy = cy - e.clientY;
 
       const diag = Math.hypot(window.innerWidth, window.innerHeight);
-      const nx = (dx / diag) * MAX_OFFSET * 4;
-      const ny = (dy / diag) * MAX_OFFSET * 4;
+      const nx = (dx / diag) * MAX_OFFSET * 3;
+      const ny = (dy / diag) * MAX_OFFSET * 3;
 
       const clamp = (v: number) =>
         Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, v));
@@ -92,11 +92,11 @@ export function FlowerWindEffect() {
 
   if (reduceMotion) {
     return (
-      <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
+      <div className="absolute inset-0 overflow-hidden flex items-center justify-center">
         <img
           src={heroRose}
           alt="Rosa pintada feita de partituras musicais"
-          className="w-full h-full object-contain select-none pointer-events-none"
+          className="w-full h-full object-cover select-none pointer-events-none"
           draggable={false}
         />
       </div>
@@ -106,13 +106,13 @@ export function FlowerWindEffect() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full overflow-hidden flex items-center justify-center"
+      className="absolute inset-0 overflow-hidden flex items-center justify-center"
     >
       <motion.img
         src={heroRose}
         alt="Rosa pintada feita de partituras musicais"
         style={{ x, y, rotate }}
-        className="w-full h-full object-contain select-none pointer-events-none"
+        className="w-full h-full object-cover select-none pointer-events-none"
         draggable={false}
       />
     </div>

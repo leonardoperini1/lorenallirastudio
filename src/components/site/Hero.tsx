@@ -6,8 +6,10 @@ const WA = waLink();
 export function Hero() {
   return (
     <section id="inicio" className="relative min-h-[110vh] lg:min-h-screen pt-32 pb-20 overflow-hidden flex flex-col justify-center">
-      {/* Soft ambient gradient (background image moved into FlowerWindEffect) */}
+      {/* Background flor animada (full-bleed) + overlays p/ legibilidade */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
+        <FlowerWindEffect />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/30" />
         <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 via-transparent to-background" />
       </div>
 
@@ -52,9 +54,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hidden lg:block lg:col-span-5 h-[600px] xl:h-[700px]">
-            <FlowerWindEffect />
-          </div>
+          <div className="hidden lg:block lg:col-span-5" aria-hidden="true" />
         </div>
       </div>
 
