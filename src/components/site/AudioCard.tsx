@@ -4,6 +4,7 @@ import { Play, Pause } from "lucide-react";
 interface Props {
   id: string;
   cover: string;
+  posterFallback?: string;
   title: string;
   occasion: string;
   src?: string;
@@ -12,11 +13,21 @@ interface Props {
   onPause: (id: string) => void;
 }
 
-export function AudioCard({ id, cover, title, occasion, src, isPlaying, onPlay, onPause }: Props) {
+function getMediaType(cover: string): "video" | "gif" | "image" {
+  const lower = cover.toLowerCase();
+  if (lower.endsWith(".mp4") || lower.includes(".mp4")) return "video";
+  if (lower.endsWith(".gif") || lower.includes(".gif")) return "gif";
+  return "image";
+}
+
+export function AudioCard({ id, cover, posterFallback, title, occasion, src, isPlaying, onPlay, onPause }: Props) {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const mediaType = getMediaType(cover);
 
   useEffect(() => {
     const a = audioRef.current;
@@ -26,7 +37,13 @@ export function AudioCard({ id, cover, title, occasion, src, isPlaying, onPlay, 
       setDuration(a.duration || 0);
       setProgress(a.duration ? (a.currentTime / a.duration) * 100 : 0);
     };
-    const onEnd = () => { onPause(id); setProgress(0); setCurrent(0); };
+    const onEnd = () => {
+      // seamless loop: restart audio + video to avoid perceptible gap
+      if (a.loop) return;
+      onPause(id);
+      setProgress(0);
+      setCurrent(0);
+    };
     const onMeta = () => setDuration(a.duration || 0);
     a.addEventListener("timeupdate", onTime);
     a.addEventListener("ended", onEnd);
@@ -38,17 +55,30 @@ export function AudioCard({ id, cover, title, occasion, src, isPlaying, onPlay, 
     };
   }, [id, onPause]);
 
-  // Sync external isPlaying state with the <audio> element
+  // Sync external isPlaying state with audio + video elements
   useEffect(() => {
     const a = audioRef.current;
-    if (!a) return;
+    const v = videoRef.current;
     if (isPlaying) {
-      const p = a.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
+      if (a) {
+        a.loop = true;
+        const p = a.play();
+        if (p && typeof p.catch === "function") p.catch(() => {});
+      }
+      if (v) {
+        v.loop = true;
+        v.currentTime = 0;
+        const p = v.play();
+        if (p && typeof p.catch === "function") p.catch(() => {});
+      }
     } else {
-      a.pause();
-      if (!progress) {
-        a.currentTime = 0;
+      if (a) {
+        a.pause();
+        if (!progress) a.currentTime = 0;
+      }
+      if (v) {
+        v.pause();
+        v.currentTime = 0;
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,20 +96,81 @@ export function AudioCard({ id, cover, title, occasion, src, isPlaying, onPlay, 
     return `${m}:${String(r).padStart(2, "0")}`;
   };
 
+  // Resolve poster (static frame) for video/gif
+  const poster = posterFallback;
+
   return (
-    <article className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full"
+    <article
+      className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full"
       style={{ boxShadow: "0 4px 24px -8px oklch(0.4 0.05 30 / 0.18)" }}
     >
       {src && <audio ref={audioRef} src={src} preload="metadata" />}
-      <div className="aspect-square overflow-hidden">
-        <img
-          src={cover}
-          alt={title}
-          loading="lazy"
-          width={768}
-          height={768}
-          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
-        />
+
+      <div className="relative aspect-square overflow-hidden bg-muted">
+        {mediaType === "video" && (
+          <video
+            ref={videoRef}
+            src={cover}
+            poster={poster}
+            muted
+            playsInline
+            preload="metadata"
+            loop
+            className="h-full w-full object-cover"
+          />
+        )}
+
+        {mediaType === "gif" && (
+          <>
+            {/* Static poster shown when paused */}
+            {!isPlaying && poster && (
+              <img
+                src={poster}
+                alt={title}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+            {isPlaying && (
+              <img
+                src={cover}
+                alt={title}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+            {!poster && (
+              <img
+                src={cover}
+                alt={title}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )}
+          </>
+        )}
+
+        {mediaType === "image" && (
+          <img
+            src={cover}
+            alt={title}
+            loading="lazy"
+            width={768}
+            height={768}
+            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+          />
+        )}
+
+        {/* Overlay play button for video/gif (audio cards keep button below) */}
+        {(mediaType === "video" || mediaType === "gif") && (
+          <button
+            onClick={toggle}
+            aria-label={isPlaying ? "Pausar" : "Tocar"}
+            className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/20 transition-colors"
+          >
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground/90 text-background backdrop-blur-sm shadow-lg transition-transform duration-300 hover:scale-110">
+              {isPlaying ? <Pause size={22} fill="currentColor" /> : <Play size={22} fill="currentColor" className="ml-1" />}
+            </span>
+          </button>
+        )}
       </div>
 
       <div className="p-6 lg:p-7">
