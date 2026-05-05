@@ -43,27 +43,24 @@ export function Footer() {
           </div>
 
           <div>
-            <div className="text-[0.65rem] tracking-editorial uppercase text-primary mb-4">Contato</div>
-            <ul className="space-y-2 text-sm text-foreground/80">
-              <li>
-                <a
-                  href={waLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
-                >
-                  WhatsApp: (19) 98283-1700
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:personalizesuatrilha@gmail.com"
-                  className="hover:text-primary transition-colors"
-                >
-                  personalizesuatrilha@gmail.com
-                </a>
-              </li>
-            </ul>
+            <div className="flex items-center gap-5">
+              <a
+                href={waLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="text-foreground/80 hover:text-primary transition-colors"
+              >
+                <WhatsAppIcon size={32} />
+              </a>
+              <a
+                href="mailto:personalizesuatrilha@gmail.com"
+                aria-label="E-mail"
+                className="text-foreground/80 hover:text-primary transition-colors"
+              >
+                <Mail size={32} strokeWidth={1.5} />
+              </a>
+            </div>
           </div>
         </div>
 
