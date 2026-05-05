@@ -23,6 +23,7 @@ const plans = [
     features: [
       "Canção original personalizada",
       "2 versões da mesma canção (interpretação/arranjo)",
+      "Playback instrumental",
     ],
     cta: "Quero o Intermezzo",
     waMessage: "Ola, gostaria de saber mais sobre o plano Intermezzo",
