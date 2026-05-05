@@ -159,18 +159,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
           />
         )}
 
-        {/* Overlay play button for video/gif (audio cards keep button below) */}
-        {(mediaType === "video" || mediaType === "gif") && (
-          <button
-            onClick={toggle}
-            aria-label={isPlaying ? "Pausar" : "Tocar"}
-            className="absolute inset-0 flex items-center justify-center bg-black/0 hover:bg-black/20 transition-colors"
-          >
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-foreground/90 text-background backdrop-blur-sm shadow-lg transition-transform duration-300 hover:scale-110">
-              {isPlaying ? <Pause size={22} fill="currentColor" /> : <Play size={22} fill="currentColor" className="ml-1" />}
-            </span>
-          </button>
-        )}
+        {/* MP4/GIF sync com o áudio — sem controles próprios */}
       </div>
 
       <div className="p-6 lg:p-7">
