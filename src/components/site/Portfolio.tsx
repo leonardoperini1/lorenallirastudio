@@ -5,7 +5,7 @@ import heroRose from "@/assets/hero-rose.jpg";
 import { AudioCard } from "./AudioCard";
 import p1 from "@/assets/portfolio-1.jpg";
 import p2 from "@/assets/portfolio-2.mp4";
-import p2poster from "@/assets/portfolio-2-poster.jpg";
+import p2poster from "@/assets/portfolio-2.mp4";
 import p3 from "@/assets/portfolio-3.gif";
 import p3poster from "@/assets/portfolio-3.jpg";
 import p4 from "@/assets/portfolio-4.jpg";
