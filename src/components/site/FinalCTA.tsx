@@ -33,10 +33,6 @@ export function FinalCTA() {
             <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
               Reservar música
             </a>
-            <a
-              href="mailto:personalizesuatrilha@gmail.com"
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-[#F4EDE6]/30 text-[#F4EDE6] text-[0.78rem] tracking-editorial uppercase font-medium hover:bg-[#F4EDE6] hover:text-foreground transition-all duration-400"
-            >
               personalizesuatrilha@gmail.com
             </a>
           </div>
