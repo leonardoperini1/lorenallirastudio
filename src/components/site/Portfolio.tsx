@@ -5,18 +5,20 @@ import heroRose from "@/assets/hero-rose.jpg";
 import { AudioCard } from "./AudioCard";
 import p1 from "@/assets/portfolio-1.jpg";
 import p2 from "@/assets/portfolio-2.mp4";
+import p2poster from "@/assets/portfolio-2.jpg";
 import p3 from "@/assets/portfolio-3.gif";
+import p3poster from "@/assets/portfolio-3.jpg";
 import p4 from "@/assets/portfolio-4.jpg";
 import p5 from "@/assets/portfolio-5.jpg";
 import p6 from "@/assets/portfolio-6.jpg";
 
 const tracks = [
-  { id: "eu-te-vi", cover: p3, title: "Eu te vi", occasion: "Dia das mães", src: "/audio/eu-te-vi.mp3" },
+  { id: "eu-te-vi", cover: p3, posterFallback: p3poster, title: "Eu te vi", occasion: "Dia das mães", src: "/audio/eu-te-vi.mp3" },
   { id: "ll-vereadora", cover: p1, title: "LL para vereadora", occasion: "Jingle", src: "/audio/ll-para-vereadora.mp3" },
   { id: "e-um-menino", cover: p5, title: "É um menino!", occasion: "Chá revelação", src: "/audio/e-um-menino.mp3" },
   { id: "rafaella", cover: p4, title: "Rafaella", occasion: "Debutante", src: "/audio/rafaella.mp3" },
   { id: "por-voce", cover: p6, title: "Por você", occasion: "Poesia musicada", src: "/audio/por-voce.mp3" },
-  { id: "casamento", cover: p2, title: "Casamento dos sonhos", occasion: "Casamento", src: "/audio/casamento-dos-sonhos.mp3" },
+  { id: "casamento", cover: p2, posterFallback: p2poster, title: "Casamento dos sonhos", occasion: "Casamento", src: "/audio/casamento-dos-sonhos.mp3" },
 ];
 
 export function Portfolio() {

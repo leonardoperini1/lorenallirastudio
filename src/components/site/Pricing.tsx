@@ -23,6 +23,7 @@ const plans = [
     features: [
       "Canção original personalizada",
       "2 versões da mesma canção (interpretação/arranjo)",
+      "Playback instrumental",
     ],
     cta: "Quero o Intermezzo",
     waMessage: "Ola, gostaria de saber mais sobre o plano Intermezzo",
@@ -64,11 +65,7 @@ export function Pricing() {
           {plans.map((p, i) => (
             <article
               key={p.name}
-              className={`reveal relative flex flex-col rounded-3xl p-8 lg:p-10 transition-all duration-500 hover:-translate-y-2 ${
-                p.featured
-                  ? "bg-foreground text-background border-2 border-primary shadow-[0_24px_60px_-20px_oklch(0.62_0.09_35/0.5)] lg:scale-[1.04] lg:my-0"
-                  : "bg-card border border-border/60 shadow-[0_4px_24px_-12px_oklch(0.4_0.05_30/0.15)]"
-              }`}
+              className="reveal relative flex flex-col rounded-3xl p-8 lg:p-10 transition-all duration-500 hover:-translate-y-2 bg-card border border-border/60 shadow-[0_4px_24px_-12px_oklch(0.4_0.05_30/0.15)]"
               style={{ transitionDelay: `${i * 100}ms` }}
             >
               {p.featured && (
@@ -79,15 +76,15 @@ export function Pricing() {
 
               <div className="mb-8">
                 <h3 className="font-serif text-4xl mb-2">{p.name}</h3>
-                <p className={`text-sm font-light italic ${p.featured ? "text-background/70" : "text-muted-foreground"}`}>
+                <p className="text-sm font-light italic text-muted-foreground">
                   {p.tagline}
                 </p>
               </div>
 
-              <div className={`mb-10 pb-8 border-b ${p.featured ? "border-background/20" : "border-border/60"}`}>
+              <div className="mb-10 pb-8 border-b border-border/60">
                 <div className="flex items-baseline gap-2 flex-wrap">
                   {p.priceFrom && (
-                    <span className={`text-sm font-light ${p.featured ? "text-background/70" : "text-muted-foreground"}`}>
+                    <span className="text-sm font-light text-muted-foreground">
                       a partir de
                     </span>
                   )}
@@ -98,12 +95,10 @@ export function Pricing() {
               <ul className="space-y-4 mb-10 flex-1">
                 {p.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm leading-relaxed">
-                    <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
-                      p.featured ? "bg-primary text-primary-foreground" : "bg-sage/15 text-sage"
-                    }`}>
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sage/15 text-sage">
                       <Check size={12} strokeWidth={3} />
                     </span>
-                    <span className={p.featured ? "text-background/90" : "text-foreground/85"}>{f}</span>
+                    <span className="text-foreground/85">{f}</span>
                   </li>
                 ))}
               </ul>
