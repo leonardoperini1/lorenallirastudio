@@ -33,8 +33,6 @@ export function FinalCTA() {
             <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
               Reservar música
             </a>
-              personalizesuatrilha@gmail.com
-            </a>
           </div>
         </div>
       </div>
