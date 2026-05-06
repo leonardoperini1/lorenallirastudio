@@ -39,6 +39,7 @@ const tracks = [
   { 
     id: "e-um-menino", 
     cover: p5, 
+    posterFallback: p5poster,
     title: "É um menino!", 
     occasion: "Chá revelação", 
     src: "/audio/e-um-menino.mp3" 
@@ -46,6 +47,7 @@ const tracks = [
   { 
     id: "rafaella", 
     cover: p4, 
+    posterFallback: p4poster,
     title: "Rafaella", 
     occasion: "Debutante", 
     src: "/audio/rafaella.mp3" 
@@ -53,6 +55,7 @@ const tracks = [
   { 
     id: "por-voce", 
     cover: p6, 
+    posterFallback: p6poster,
     title: "Por você", 
     occasion: "Poesia musicada", 
     src: "/audio/por-voce.mp3" 
