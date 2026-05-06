@@ -29,14 +29,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
 
   const mediaType = getMediaType(cover);
 
-  // 1. Forçar o vídeo a começar pausado e sem autoplay ao montar
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-    }
-  }, []);
-
-  // 2. Efeito de Monitoramento do Áudio e Progresso
+  // 1. Controle de tempo e progresso do áudio
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
@@ -61,7 +54,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     };
   }, [id, onPause]);
 
-  // 3. SINCRONIA DE ESTADO: Play/Pause simultâneo para Áudio e Vídeo
+  // 2. Sincronização rigorosa de Play/Pause (Áudio + Vídeo)
   useEffect(() => {
     const a = audioRef.current;
     const v = videoRef.current;
@@ -93,21 +86,33 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
 
       <div className="relative aspect-square overflow-hidden bg-muted">
         {mediaType === "video" && (
-          <video
-            ref={videoRef}
-            key={id} 
-            src={cover}
-            poster={posterFallback}
-            muted
-            playsInline
-            loop
-            preload="metadata"
-            autoPlay={false}
-            onCanPlay={(e) => {
-              if (!isPlaying) e.currentTarget.pause();
-            }}
-            className="h-full w-full object-cover"
-          />
+          <>
+            {/* Camada de Capa Estática: Garante que o celular não mostre tela preta */}
+            {!isPlaying && posterFallback && (
+              <img 
+                src={posterFallback} 
+                alt={title} 
+                className="absolute inset-0 z-10 h-full w-full object-cover"
+              />
+            )}
+            
+            <video
+              ref={videoRef}
+              key={id}
+              src={cover}
+              poster={posterFallback}
+              muted
+              playsInline
+              loop
+              preload="metadata"
+              autoPlay={false}
+              onCanPlay={(e) => {
+                // Impede o início automático por cache do navegador
+                if (!isPlaying) e.currentTarget.pause();
+              }}
+              className="h-full w-full object-cover"
+            />
+          </>
         )}
 
         {mediaType === "gif" && (
@@ -122,7 +127,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
           <img
             src={cover}
             alt={title}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
           />
         )}
       </div>
@@ -138,7 +143,11 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
             className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
             aria-label={isPlaying ? "Pausar" : "Tocar"}
           >
-            {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
+            {isPlaying ? (
+              <Pause size={16} fill="currentColor" />
+            ) : (
+              <Play size={16} fill="currentColor" className="ml-0.5" />
+            )}
           </button>
         </div>
 
