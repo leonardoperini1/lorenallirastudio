@@ -45,14 +45,14 @@ export function Hero() {
               </a>
             </div>
 
-            {/* Estatísticas com espaçamento corrigido */}
-            <div className="mt-20 flex flex-wrap gap-12 lg:gap-16 border-t border-foreground/10 pt-10 max-w-2xl">
+            {/* Estatísticas padronizadas à esquerda no mobile */}
+            <div className="mt-20 flex flex-col items-start gap-8 md:flex-row md:flex-wrap md:gap-12 lg:gap-16 border-t border-foreground/10 pt-10 max-w-2xl">
               {[
                 ["+ 380", "composições autorais"],
                 ["7 dias", "entrega média"],
                 ["100%", "original"],
               ].map(([n, l]) => (
-                <div key={l} className="flex flex-col gap-1">
+                <div key={l} className="flex flex-col gap-1 items-start">
                   <div className="font-serif text-3xl xl:text-4xl text-foreground">{n}</div>
                   <div className="text-[0.65rem] tracking-[0.15em] uppercase text-muted-foreground/80">{l}</div>
                 </div>
@@ -63,8 +63,6 @@ export function Hero() {
           <div className="hidden lg:block lg:col-span-4 xl:col-span-5" />
         </div>
       </div>
-
-      {/* Scroll cue ajustado para não sobrepor o texto */}
-     </section>
+    </section>
   );
 }
