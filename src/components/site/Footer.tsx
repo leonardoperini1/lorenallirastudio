@@ -29,7 +29,7 @@ export function Footer() {
               </span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed font-light max-w-xs">
-              Atelier de composições autorais para momentos que merecem ser eternizados em música.
+              Atelier de composições autorais para momentos que merecem ser eternizados em música
             </p>
           </div>
 
