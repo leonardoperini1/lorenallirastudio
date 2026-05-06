@@ -37,7 +37,7 @@ function Index() {
       <Portfolio />
       <HowItWorks />
       <Pricing />
-      <MothersDayPromo />
+      <SpacePromo />
       <Testimonials />
       <FinalCTA />
       <Footer />
