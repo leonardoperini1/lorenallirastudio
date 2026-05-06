@@ -38,8 +38,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
       setProgress(a.duration ? (a.currentTime / a.duration) * 100 : 0);
     };
     const onEnd = () => {
-      // seamless loop: restart audio + video to avoid perceptible gap
-      if (a.loop) return;
       onPause(id);
       setProgress(0);
       setCurrent(0);
@@ -55,33 +53,20 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     };
   }, [id, onPause]);
 
-  // Sync external isPlaying state with audio + video elements
   useEffect(() => {
     const a = audioRef.current;
     const v = videoRef.current;
     if (isPlaying) {
       if (a) {
-        a.loop = true;
-        const p = a.play();
-        if (p && typeof p.catch === "function") p.catch(() => {});
+        a.play().catch(() => {});
       }
       if (v) {
-        v.loop = true;
-        v.currentTime = 0;
-        const p = v.play();
-        if (p && typeof p.catch === "function") p.catch(() => {});
+        v.play().catch(() => {});
       }
     } else {
-      if (a) {
-        a.pause();
-        if (!progress) a.currentTime = 0;
-      }
-      if (v) {
-        v.pause();
-        v.currentTime = 0;
-      }
+      if (a) a.pause();
+      if (v) v.pause();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPlaying]);
 
   const toggle = () => {
@@ -96,7 +81,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     return `${m}:${String(r).padStart(2, "0")}`;
   };
 
-  // Resolve poster (static frame) for video/gif
   const poster = posterFallback;
 
   return (
@@ -104,7 +88,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
       className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full"
       style={{ boxShadow: "0 4px 24px -8px oklch(0.4 0.05 30 / 0.18)" }}
     >
-      {src && <audio ref={audioRef} src={src} preload="metadata" />}
+      {src && <audio ref={audioRef} src={src} preload="auto" loop />}
 
       <div className="relative aspect-square overflow-hidden bg-muted">
         {mediaType === "video" && (
@@ -114,38 +98,18 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
             poster={poster}
             muted
             playsInline
-            preload="metadata"
+            preload="auto"
             loop
             className="h-full w-full object-cover"
           />
         )}
 
         {mediaType === "gif" && (
-          <>
-            {/* Static poster shown when paused */}
-            {!isPlaying && poster && (
-              <img
-                src={poster}
-                alt={title}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            )}
-            {isPlaying && (
-              <img
-                src={cover}
-                alt={title}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            )}
-            {!poster && (
-              <img
-                src={cover}
-                alt={title}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            )}
-          </>
+          <img
+            src={isPlaying ? cover : (poster || cover)}
+            alt={title}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
         )}
 
         {mediaType === "image" && (
@@ -153,13 +117,9 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
             src={cover}
             alt={title}
             loading="lazy"
-            width={768}
-            height={768}
             className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
           />
         )}
-
-        {/* MP4/GIF sync com o áudio — sem controles próprios */}
       </div>
 
       <div className="p-6 lg:p-7">
