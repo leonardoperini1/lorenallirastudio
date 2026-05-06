@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import heroRose from "@/assets/hero-rose.jpg";
 import { AudioCard } from "./AudioCard";
 
-// IMPORTAÇÃO DOS VÍDEOS E DOS POSTERS (CAPAS)
+// IMPORTAÇÃO DOS VÍDEOS E DOS POSTERS (CAPAS) - EXTENSÕES CORRIGIDAS PARA .PNG
 import p1 from "@/assets/portfolio-1.mp4";
 import p1poster from "@/assets/portfolio-1-poster.png"; 
 import p2 from "@/assets/portfolio-2.mp4";
