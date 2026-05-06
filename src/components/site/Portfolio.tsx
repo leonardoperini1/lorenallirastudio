@@ -3,20 +3,65 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import heroRose from "@/assets/hero-rose.jpg";
 import { AudioCard } from "./AudioCard";
+
+// IMPORTAÇÃO DOS VÍDEOS E DOS POSTERS (CAPAS)
 import p1 from "@/assets/portfolio-1.mp4";
+import p1poster from "@/assets/portfolio-1-poster.jpg"; 
 import p2 from "@/assets/portfolio-2.mp4";
+import p2poster from "@/assets/portfolio-2-poster.jpg"; 
 import p3 from "@/assets/portfolio-3.mp4";
+import p3poster from "@/assets/portfolio-3-poster.jpg"; 
+
 import p4 from "@/assets/portfolio-4.jpg";
 import p5 from "@/assets/portfolio-5.jpg";
 import p6 from "@/assets/portfolio-6.jpg";
 
 const tracks = [
-  { id: "eu-te-vi", cover: p3, title: "Eu te vi", occasion: "Dia das mães", src: "/audio/eu-te-vi.mp3" },
-  { id: "ll-vereadora", cover: p1, title: "LL para vereadora", occasion: "Jingle", src: "/audio/ll-para-vereadora.mp3" },
-  { id: "e-um-menino", cover: p5, title: "É um menino!", occasion: "Chá revelação", src: "/audio/e-um-menino.mp3" },
-  { id: "rafaella", cover: p4, title: "Rafaella", occasion: "Debutante", src: "/audio/rafaella.mp3" },
-  { id: "por-voce", cover: p6, title: "Por você", occasion: "Poesia musicada", src: "/audio/por-voce.mp3" },
-  { id: "casamento", cover: p2, title: "Casamento dos sonhos", occasion: "Casamento", src: "/audio/casamento-dos-sonhos.mp3" },
+  { 
+    id: "eu-te-vi", 
+    cover: p3, 
+    posterFallback: p3poster, 
+    title: "Eu te vi", 
+    occasion: "Dia das mães", 
+    src: "/audio/eu-te-vi.mp3" 
+  },
+  { 
+    id: "ll-vereadora", 
+    cover: p1, 
+    posterFallback: p1poster, 
+    title: "LL para vereadora", 
+    occasion: "Jingle", 
+    src: "/audio/ll-para-vereadora.mp3" 
+  },
+  { 
+    id: "e-um-menino", 
+    cover: p5, 
+    title: "É um menino!", 
+    occasion: "Chá revelação", 
+    src: "/audio/e-um-menino.mp3" 
+  },
+  { 
+    id: "rafaella", 
+    cover: p4, 
+    title: "Rafaella", 
+    occasion: "Debutante", 
+    src: "/audio/rafaella.mp3" 
+  },
+  { 
+    id: "por-voce", 
+    cover: p6, 
+    title: "Por você", 
+    occasion: "Poesia musicada", 
+    src: "/audio/por-voce.mp3" 
+  },
+  { 
+    id: "casamento", 
+    cover: p2, 
+    posterFallback: p2poster, 
+    title: "Casamento dos sonhos", 
+    occasion: "Casamento", 
+    src: "/audio/casamento-dos-sonhos.mp3" 
+  },
 ];
 
 export function Portfolio() {
@@ -27,7 +72,6 @@ export function Portfolio() {
   const userInteractedRef = useRef(false);
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Build embla state
   useEffect(() => {
     if (!embla) return;
     const onSelect = () => setSelected(embla.selectedScrollSnap());
@@ -37,7 +81,6 @@ export function Portfolio() {
     onSelect();
   }, [embla]);
 
-  // Auto-advance every 6s while no audio has been played
   useEffect(() => {
     if (!embla) return;
     const start = () => {
@@ -52,8 +95,6 @@ export function Portfolio() {
     };
   }, [embla]);
 
-  // When slide changes, pause any currently playing track.
-  // The next track stays paused (Play button visible) until the user explicitly plays it.
   useEffect(() => {
     if (!embla) return;
     const onSelect = () => {
@@ -73,7 +114,6 @@ export function Portfolio() {
       autoplayRef.current = null;
     }
     setPlayingId(id);
-    // also align slide to the played track
     const idx = tracks.findIndex((t) => t.id === id);
     if (idx >= 0 && embla && embla.selectedScrollSnap() !== idx) {
       embla.scrollTo(idx);
@@ -129,7 +169,6 @@ export function Portfolio() {
           <div className="mt-12 flex items-center justify-center gap-6">
             <button
               onClick={() => embla?.scrollPrev()}
-              aria-label="Anterior"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
             >
               <ArrowLeft size={18} />
@@ -140,9 +179,8 @@ export function Portfolio() {
                 <button
                   key={i}
                   onClick={() => embla?.scrollTo(i)}
-                  aria-label={`Ir para slide ${i + 1}`}
                   className={`h-2 rounded-full transition-all duration-300 ${
-                    i === selected ? "w-8 bg-primary" : "w-2 bg-foreground/25 hover:bg-foreground/50"
+                    i === selected ? "w-8 bg-primary" : "w-2 bg-foreground/25"
                   }`}
                 />
               ))}
@@ -150,7 +188,6 @@ export function Portfolio() {
 
             <button
               onClick={() => embla?.scrollNext()}
-              aria-label="Próximo"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
             >
               <ArrowRight size={18} />
