@@ -31,8 +31,8 @@ export function Hero() {
 
             <p className="mt-8 max-w-2xl text-lg lg:text-xl leading-[1.6] text-foreground/80 font-light tracking-wide"
              style={{ 
-             textShadow: '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff' 
-                   }}>
+              textShadow: '-1px -1px 0 #FDF6F0, 1px -1px 0 #FDF6F0, -1px 1px 0 #FDF6F0, 1px 1px 0 #FDF6F0' 
+                    }}
                     Composições personalizadas, escritas à mão e em todos os gêneros
                     musicais para eternizar os seus momentos do seu jeito — casamentos, 
                     pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
