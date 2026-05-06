@@ -29,7 +29,14 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
 
   const mediaType = getMediaType(cover);
 
-  // Efeito para atualizar progresso e tempo do áudio
+  // 1. Forçar o vídeo a começar pausado e sem autoplay
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, []);
+
+  // 2. Efeito de Monitoramento do Áudio
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
@@ -54,17 +61,17 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     };
   }, [id, onPause]);
 
-  // SINCRONIA TOTAL: Controla Play/Pause do Vídeo e Áudio juntos
+  // 3. SINCRONIA DE ESTADO (AQUI É ONDE O VÍDEO OBEDECE O PLAY/PAUSE)
   useEffect(() => {
     const a = audioRef.current;
     const v = videoRef.current;
 
     if (isPlaying) {
-      // Inicia ambos juntos
+      // Se o áudio tocar, o vídeo toca junto
       if (a) a.play().catch(() => {});
       if (v) v.play().catch(() => {});
     } else {
-      // Pausa ambos exatamente onde estão
+      // Se o áudio pausar, o vídeo pausa exatamente onde está
       if (a) a.pause();
       if (v) v.pause();
     }
@@ -83,23 +90,21 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
   };
 
   return (
-    <article
-      className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full"
-      style={{ boxShadow: "0 4px 24px -8px oklch(0.4 0.05 30 / 0.18)" }}
-    >
+    <article className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full border border-foreground/5">
       {src && <audio ref={audioRef} src={src} preload="auto" loop />}
 
       <div className="relative aspect-square overflow-hidden bg-muted">
         {mediaType === "video" && (
           <video
             ref={videoRef}
+            key={cover} // Garante que o elemento seja recriado se mudar o vídeo
             src={cover}
             poster={posterFallback}
             muted
             playsInline
-            preload="auto"
             loop
-            // Removido o autoPlay para não iniciar sozinho
+            preload="auto"
+            autoPlay={false} // FORÇANDO FALSE AQUI
             className="h-full w-full object-cover"
           />
         )}
@@ -116,29 +121,26 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
           <img
             src={cover}
             alt={title}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+            className="h-full w-full object-cover"
           />
         )}
       </div>
 
-      <div className="p-6 lg:p-7">
+      <div className="p-6">
         <div className="flex items-start justify-between gap-4 mb-5">
           <div>
-            <div className="text-[0.65rem] tracking-editorial uppercase text-primary mb-2">{occasion}</div>
+            <div className="text-[0.65rem] tracking-widest uppercase text-primary mb-2">{occasion}</div>
             <h3 className="font-serif text-2xl leading-tight">{title}</h3>
           </div>
           <button
             onClick={toggle}
             className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
-            aria-label={isPlaying ? "Pausar" : "Tocar"}
           >
             {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
           </button>
         </div>
 
-        {/* Barra de Progresso */}
-        <div className="flex items-center gap-3 text-xs text-muted-foreground tracking-luxury">
+        <div className="flex items-center gap-3 text-xs text-muted-foreground">
           <span className="font-mono">{fmt(current)}</span>
           <div className="relative h-px flex-1 bg-foreground/15">
             <div
