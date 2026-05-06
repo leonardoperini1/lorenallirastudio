@@ -42,7 +42,7 @@ export function MothersDayPromo() {
               50<span className="text-5xl md:text-7xl align-top">%</span>
             </div>
             <div className="font-serif italic text-3xl md:text-5xl -mt-4">
-              de desconto
+              off
             </div>
           </div>
 
@@ -52,7 +52,7 @@ export function MothersDayPromo() {
 
           <p className="text-lg md:text-xl leading-[1.7] font-light max-w-2xl mx-auto mb-10 text-primary-foreground/90">
             Transforme a história da sua mãe em uma canção única.
-            Uma lembrança que ela vai guardar para sempre.
+            Uma lembrança que ela vai guardar para sempre
           </p>
 
           <a
