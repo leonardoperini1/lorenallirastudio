@@ -29,14 +29,14 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
 
   const mediaType = getMediaType(cover);
 
-  // 1. Forçar o vídeo a começar pausado e sem autoplay
+  // 1. Forçar o vídeo a começar pausado e sem autoplay ao montar
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.pause();
     }
   }, []);
 
-  // 2. Efeito de Monitoramento do Áudio
+  // 2. Efeito de Monitoramento do Áudio e Progresso
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
@@ -61,17 +61,15 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     };
   }, [id, onPause]);
 
-  // 3. SINCRONIA DE ESTADO (AQUI É ONDE O VÍDEO OBEDECE O PLAY/PAUSE)
+  // 3. SINCRONIA DE ESTADO: Play/Pause simultâneo para Áudio e Vídeo
   useEffect(() => {
     const a = audioRef.current;
     const v = videoRef.current;
 
     if (isPlaying) {
-      // Se o áudio tocar, o vídeo toca junto
       if (a) a.play().catch(() => {});
       if (v) v.play().catch(() => {});
     } else {
-      // Se o áudio pausar, o vídeo pausa exatamente onde está
       if (a) a.pause();
       if (v) v.pause();
     }
@@ -97,14 +95,17 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
         {mediaType === "video" && (
           <video
             ref={videoRef}
-            key={cover} // Garante que o elemento seja recriado se mudar o vídeo
+            key={id} 
             src={cover}
             poster={posterFallback}
             muted
             playsInline
             loop
-            preload="auto"
-            autoPlay={false} // FORÇANDO FALSE AQUI
+            preload="metadata"
+            autoPlay={false}
+            onCanPlay={(e) => {
+              if (!isPlaying) e.currentTarget.pause();
+            }}
             className="h-full w-full object-cover"
           />
         )}
@@ -135,6 +136,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
           <button
             onClick={toggle}
             className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
+            aria-label={isPlaying ? "Pausar" : "Tocar"}
           >
             {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
           </button>
