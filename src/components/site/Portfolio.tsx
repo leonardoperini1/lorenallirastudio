@@ -12,9 +12,12 @@ import p2poster from "@/assets/portfolio-2-poster.png";
 import p3 from "@/assets/portfolio-3.mp4";
 import p3poster from "@/assets/portfolio-3-poster.png"; 
 
-import p4 from "@/assets/portfolio-4.jpg";
-import p5 from "@/assets/portfolio-5.jpg";
-import p6 from "@/assets/portfolio-6.jpg";
+import p4 from "@/assets/portfolio-4.mp4";
+import p4poster from "@/assets/portfolio-4.jpg";
+import p5 from "@/assets/portfolio-5.mp4";
+import p5poster from "@/assets/portfolio-5.jpg";
+import p6 from "@/assets/portfolio-6.mp4";
+import p6poster from "@/assets/portfolio-6.jpg";
 
 const tracks = [
   { 
