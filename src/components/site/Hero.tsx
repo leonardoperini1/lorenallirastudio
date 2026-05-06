@@ -6,7 +6,6 @@ const WA = waLink();
 export function Hero() {
   return (
     <section id="inicio" className="relative min-h-[110vh] lg:min-h-screen pt-[100px] pb-[100px] overflow-hidden flex flex-col justify-center">
-      {/* Painted background image, soft */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <img
           src={heroRose}
@@ -45,16 +44,18 @@ export function Hero() {
               </a>
             </div>
 
-            {/* Estatísticas padronizadas à esquerda no mobile */}
-            <div className="mt-20 flex flex-col items-start gap-8 md:flex-row md:flex-wrap md:gap-12 lg:gap-16 border-t border-foreground/10 pt-10 max-w-2xl">
+            {/* Ajuste: 3 itens lado a lado com quebra de linha no texto */}
+            <div className="mt-20 grid grid-cols-3 gap-4 border-t border-foreground/10 pt-10 max-w-2xl">
               {[
-                ["+ 380", "composições autorais"],
-                ["7 dias", "entrega média"],
-                ["100%", "original"],
+                ["+ 380", "Composições autorais"],
+                ["7 dias", "Entrega média"],
+                ["100%", "Original"],
               ].map(([n, l]) => (
-                <div key={l} className="flex flex-col gap-1 items-start">
-                  <div className="font-serif text-3xl xl:text-4xl text-foreground">{n}</div>
-                  <div className="text-[0.65rem] tracking-[0.15em] uppercase text-muted-foreground/80">{l}</div>
+                <div key={l} className="flex flex-col gap-1">
+                  <div className="font-serif text-2xl sm:text-3xl xl:text-4xl text-foreground whitespace-nowrap">{n}</div>
+                  <div className="text-[0.6rem] sm:text-[0.65rem] tracking-[0.1em] uppercase text-muted-foreground/80 leading-tight max-w-[80px] sm:max-w-none">
+                    {l}
+                  </div>
                 </div>
               ))}
             </div>
