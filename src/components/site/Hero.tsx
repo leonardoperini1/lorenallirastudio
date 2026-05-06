@@ -29,11 +29,14 @@ export function Hero() {
               em música
             </h1>
 
-            <p className="mt-8 max-w-2xl text-lg lg:text-xl leading-[1.6] text-foreground/80 font-light tracking-wide">
-              Composições personalizadas, escritas à mão e em todos os gêneros
-              musicais para eternizar os seus momentos do seu jeito — casamentos, 
-              pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
-            </p>
+            <p className="mt-8 max-w-2xl text-lg lg:text-xl leading-[1.6] text-foreground/80 font-light tracking-wide"
+             style={{ 
+             textShadow: '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff' 
+                   }}>
+                    Composições personalizadas, escritas à mão e em todos os gêneros
+                    musicais para eternizar os seus momentos do seu jeito — casamentos, 
+                    pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
+              </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary px-10">
