@@ -54,7 +54,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     };
   }, [id, onPause]);
 
-  // 2. Sincronização rigorosa de Play/Pause (Áudio + Vídeo)
+  // 2. Sincronização Play/Pause (Áudio e Vídeo juntos)
   useEffect(() => {
     const a = audioRef.current;
     const v = videoRef.current;
@@ -65,6 +65,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     } else {
       if (a) a.pause();
       if (v) v.pause();
+      // REMOVIDO: qualquer lógica que resetava o vídeo ou subia o poster no pause
     }
   }, [isPlaying]);
 
@@ -86,33 +87,18 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
 
       <div className="relative aspect-square overflow-hidden bg-muted">
         {mediaType === "video" && (
-          <>
-            {/* Camada de Capa Estática: Garante que o celular não mostre tela preta */}
-            {!isPlaying && posterFallback && (
-              <img 
-                src={posterFallback} 
-                alt={title} 
-                className="absolute inset-0 z-10 h-full w-full object-cover"
-              />
-            )}
-            
-            <video
-              ref={videoRef}
-              key={id}
-              src={cover}
-              poster={posterFallback}
-              muted
-              playsInline
-              loop
-              preload="metadata"
-              autoPlay={false}
-              onCanPlay={(e) => {
-                // Impede o início automático por cache do navegador
-                if (!isPlaying) e.currentTarget.pause();
-              }}
-              className="h-full w-full object-cover"
-            />
-          </>
+          <video
+            ref={videoRef}
+            key={id}
+            src={cover}
+            poster={posterFallback} // O poster agora só aparece antes do primeiro play
+            muted
+            playsInline
+            loop
+            preload="auto"
+            autoPlay={false}
+            className="h-full w-full object-cover"
+          />
         )}
 
         {mediaType === "gif" && (
@@ -141,7 +127,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
           <button
             onClick={toggle}
             className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
-            aria-label={isPlaying ? "Pausar" : "Tocar"}
           >
             {isPlaying ? (
               <Pause size={16} fill="currentColor" />
