@@ -6,11 +6,11 @@ import { AudioCard } from "./AudioCard";
 
 // IMPORTAÇÃO DOS VÍDEOS E DOS POSTERS (CAPAS)
 import p1 from "@/assets/portfolio-1.mp4";
-import p1poster from "@/assets/portfolio-1-poster.jpg"; 
+import p1poster from "@/assets/portfolio-1-poster.png"; 
 import p2 from "@/assets/portfolio-2.mp4";
-import p2poster from "@/assets/portfolio-2-poster.jpg"; 
+import p2poster from "@/assets/portfolio-2-poster.png"; 
 import p3 from "@/assets/portfolio-3.mp4";
-import p3poster from "@/assets/portfolio-3-poster.jpg"; 
+import p3poster from "@/assets/portfolio-3-poster.png"; 
 
 import p4 from "@/assets/portfolio-4.jpg";
 import p5 from "@/assets/portfolio-5.jpg";
