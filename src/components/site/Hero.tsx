@@ -14,8 +14,9 @@ export function Hero() {
           width={1920}
           height={1280}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/30 to-transparent" />
+        {/* Camadas de gradiente para melhorar contraste geral */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/20 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent" />
       </div>
 
       <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16 w-full">
@@ -29,14 +30,15 @@ export function Hero() {
               em música
             </h1>
 
-            <p className="mt-8 max-w-2xl text-lg lg:text-xl leading-[1.6] text-foreground/80 font-light tracking-wide"
-             style={{ 
-              textShadow: '-1px -1px 0 #FDF6F0, 1px -1px 0 #FDF6F0, -1px 1px 0 #FDF6F0, 1px 1px 0 #FDF6F0' 
-                    }}
-                    Composições personalizadas, escritas à mão e em todos os gêneros
-                    musicais para eternizar os seus momentos do seu jeito — casamentos, 
-                    pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
-              </p>
+            {/* Ajuste de legibilidade: font-medium e drop-shadow suave */}
+            <p className="mt-8 max-w-2xl text-lg lg:text-xl leading-[1.6] text-foreground font-normal tracking-wide"
+               style={{ 
+                 textShadow: '0px 2px 4px rgba(255, 255, 255, 0.5), 0px 0px 20px rgba(255, 255, 255, 0.3)' 
+               }}>
+              Composições personalizadas, escritas à mão e em todos os gêneros
+              musicais para eternizar os seus momentos do seu jeito — casamentos, 
+              pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
+            </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary px-10">
@@ -47,7 +49,6 @@ export function Hero() {
               </a>
             </div>
 
-            {/* Ajuste: 3 itens lado a lado com quebra de linha no texto */}
             <div className="mt-20 grid grid-cols-3 gap-4 border-t border-foreground/10 pt-10 max-w-2xl">
               {[
                 ["+ 380", "Composições autorais"],
