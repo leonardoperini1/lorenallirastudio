@@ -18,7 +18,7 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
-      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-6 md:px-10 lg:px-16">
+      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-center gap-10 px-6 md:px-10 lg:px-16 relative">
         <a href="#inicio" className="flex items-center gap-3 group">
           <img src={monogram} alt="Lorena LLira" className="h-14 w-14 md:h-14 md:w-14 shrink-0" width={36} height={36} />
           <span className="font-serif text-xl md:text-xl tracking-luxury text-foreground leading-none">
@@ -39,7 +39,7 @@ export function Header() {
         </nav>
 
         <button
-          className="lg:hidden flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20"
+          className="lg:hidden absolute right-6 md:right-10 flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20"
           onClick={() => setOpen(!open)}
           aria-label="Menu"
         >
