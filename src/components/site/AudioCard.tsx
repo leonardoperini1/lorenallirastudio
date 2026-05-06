@@ -29,6 +29,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
 
   const mediaType = getMediaType(cover);
 
+  // Efeito para atualizar progresso e tempo do áudio
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
@@ -53,17 +54,17 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     };
   }, [id, onPause]);
 
+  // SINCRONIA TOTAL: Controla Play/Pause do Vídeo e Áudio juntos
   useEffect(() => {
     const a = audioRef.current;
     const v = videoRef.current;
+
     if (isPlaying) {
-      if (a) {
-        a.play().catch(() => {});
-      }
-      if (v) {
-        v.play().catch(() => {});
-      }
+      // Inicia ambos juntos
+      if (a) a.play().catch(() => {});
+      if (v) v.play().catch(() => {});
     } else {
+      // Pausa ambos exatamente onde estão
       if (a) a.pause();
       if (v) v.pause();
     }
@@ -81,8 +82,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
     return `${m}:${String(r).padStart(2, "0")}`;
   };
 
-  const poster = posterFallback;
-
   return (
     <article
       className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full"
@@ -95,18 +94,19 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
           <video
             ref={videoRef}
             src={cover}
-            poster={poster}
+            poster={posterFallback}
             muted
             playsInline
             preload="auto"
             loop
+            // Removido o autoPlay para não iniciar sozinho
             className="h-full w-full object-cover"
           />
         )}
 
         {mediaType === "gif" && (
           <img
-            src={isPlaying ? cover : (poster || cover)}
+            src={isPlaying ? cover : (posterFallback || cover)}
             alt={title}
             className="absolute inset-0 h-full w-full object-cover"
           />
@@ -137,6 +137,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
           </button>
         </div>
 
+        {/* Barra de Progresso */}
         <div className="flex items-center gap-3 text-xs text-muted-foreground tracking-luxury">
           <span className="font-mono">{fmt(current)}</span>
           <div className="relative h-px flex-1 bg-foreground/15">
