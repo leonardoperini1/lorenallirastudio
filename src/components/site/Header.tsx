@@ -77,7 +77,7 @@ export function Header() {
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-base tracking-luxury uppercase font-medium text-foreground"
+                className={`text-base tracking-luxury uppercase font-medium ${active === l.href ? "text-primary" : "text-foreground"}`}
               >
                 {l.label}
               </a>
