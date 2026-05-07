@@ -8,6 +8,7 @@ interface Props {
   title: string;
   occasion: string;
   src?: string;
+  objectPosition?: string;
   isPlaying: boolean;
   onPlay: (id: string) => void;
   onPause: (id: string) => void;
@@ -20,7 +21,7 @@ function getMediaType(cover: string): "video" | "gif" | "image" {
   return "image";
 }
 
-export function AudioCard({ id, cover, posterFallback, title, occasion, src, isPlaying, onPlay, onPause }: Props) {
+export function AudioCard({ id, cover, posterFallback, title, occasion, src, objectPosition = "center 25%", isPlaying, onPlay, onPause }: Props) {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -98,7 +99,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
             autoPlay
             preload="auto"
             className="h-full w-full object-cover"
-            style={{ objectPosition: "center 25%" }}
+            style={{ objectPosition }}
           />
         )}
 
