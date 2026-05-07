@@ -18,15 +18,15 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
-      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-center gap-10 px-6 md:px-10 lg:px-16 relative">
+      <div className="mx-auto flex h-24 max-w-[1440px] items-center px-6 md:px-10 lg:px-16 relative">
         <a href="#inicio" className="flex items-center gap-3 group">
-          <img src={monogram} alt="Lorena LLira" className="h-14 w-14 md:h-14 md:w-14 shrink-0" width={36} height={36} />
+          <img src={monogram} alt="Lorena LLira" className="h-[4.55rem] w-[4.55rem] shrink-0" width={73} height={73} />
           <span className="font-serif text-xl md:text-xl tracking-luxury text-foreground leading-none">
             Lorena <span className="text-primary">LL</span>ira
           </span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {links.map((l) => (
             <a
               key={l.href}
