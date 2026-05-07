@@ -48,7 +48,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden absolute inset-x-0 top-20 bg-background/98 border-t border-foreground/5 px-6 py-8 animate-fade-in shadow-xl">
+        <div className="lg:hidden absolute inset-x-0 top-24 bg-background/98 border-t border-foreground/5 px-6 py-8 animate-fade-in shadow-xl">
           <nav className="flex flex-col gap-6">
             {links.map((l) => (
               <a
