@@ -11,10 +11,30 @@ const links = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>("#inicio");
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
+
+  useEffect(() => {
+    const ids = links.map((l) => l.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive("#" + visible.target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
@@ -31,7 +51,9 @@ export function Header() {
             <a
               key={l.href}
               href={l.href}
-              className="text-[0.78rem] tracking-editorial uppercase font-medium text-foreground/80 hover:text-primary transition-colors duration-300"
+              className={`text-[0.78rem] tracking-editorial uppercase font-medium hover:text-primary transition-colors duration-300 ${
+                active === l.href ? "text-primary" : "text-foreground/80"
+              }`}
             >
               {l.label}
             </a>
