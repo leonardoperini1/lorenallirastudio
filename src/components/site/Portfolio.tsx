@@ -138,19 +138,15 @@ export function Portfolio() {
       </div>
 
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
-        <div className="reveal grid lg:grid-cols-12 gap-10 mb-20 lg:mb-28">
-          <div className="lg:col-span-5">
-            <span className="eyebrow block mb-6">Portfólio</span>
-            <h2 className="font-serif text-5xl lg:text-7xl leading-[1] tracking-[-0.015em]">
-              Histórias que <em className="italic font-light text-primary">soam</em> como sentem
-            </h2>
-          </div>
-          <div className="lg:col-span-6 lg:col-start-7 lg:pt-8">
-            <p className="text-lg leading-[1.8] text-foreground/75 font-light">
-              Cada peça nasce de uma conversa, segue por um caderno de rascunhos e
-              termina em uma música acompanhada de um sorriso. Inspire-se
-            </p>
-          </div>
+        <div className="reveal text-center max-w-3xl mx-auto mb-20 lg:mb-24">
+          <span className="eyebrow block mb-6">Portfólio</span>
+          <h2 className="font-serif text-5xl lg:text-7xl leading-[1] tracking-[-0.015em]">
+            Histórias que <em className="italic font-light text-primary">soam</em> como sentem
+          </h2>
+          <p className="mt-8 text-lg leading-[1.8] text-foreground/70 font-light">
+            Cada peça nasce de uma conversa, segue por um caderno de rascunhos e
+            termina em uma música acompanhada de um sorriso. Inspire-se
+          </p>
         </div>
 
         <div className="relative reveal">
