@@ -98,6 +98,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
             loop
             autoPlay
             preload="auto"
+            aria-label={`Vídeo da composição ${title} — ${occasion}`}
             className="h-full w-full object-cover"
             style={{ objectPosition }}
           />
@@ -106,7 +107,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
         {mediaType === "gif" && (
           <img
             src={isPlaying ? cover : (posterFallback || cover)}
-            alt={title}
+            alt={`Capa animada da composição ${title} — ${occasion}`}
             className="absolute inset-0 h-full w-full object-cover"
           />
         )}
@@ -114,7 +115,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
         {mediaType === "image" && (
           <img
             src={cover}
-            alt={title}
+            alt={`Capa da composição ${title} — ${occasion}`}
             className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
           />
         )}
