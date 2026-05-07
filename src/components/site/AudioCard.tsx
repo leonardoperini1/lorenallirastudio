@@ -91,13 +91,14 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, isP
             ref={videoRef}
             key={id}
             src={cover}
-            poster={posterFallback} // O poster agora só aparece antes do primeiro play
+            poster={posterFallback}
             muted
             playsInline
             loop
+            autoPlay
             preload="auto"
-            autoPlay={false}
             className="h-full w-full object-cover"
+            style={{ objectPosition: "center 25%" }}
           />
         )}
 
