@@ -15,15 +15,43 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "Lorena LLira · Composições musicais personalizadas" },
+      { title: "Lorena Llira | Composições personalizadas" },
       {
         name: "description",
         content:
-          "Atelier de composições autorais sob medida. Transforme sentimentos em música — casamentos, pedidos, aniversários e momentos únicos.",
+          "Atelier de composições autorais para momentos que merecem ser eternizados em música.",
       },
-      { property: "og:title", content: "Lorena LLira · Composições personalizadas" },
-      { property: "og:description", content: "Transforme sentimentos em música. Composições autorais gravadas em estúdio." },
+      { property: "og:title", content: "Lorena Llira | Composições personalizadas" },
+      {
+        property: "og:description",
+        content:
+          "Atelier de composições autorais para momentos que merecem ser eternizados em música.",
+      },
+      { property: "og:url", content: "https://lorenallira.com.br/" },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://lorenallira.com.br/og-image.jpg" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Lorena Llira | Composições personalizadas" },
+      {
+        name: "twitter:description",
+        content:
+          "Atelier de composições autorais para momentos que merecem ser eternizados em música.",
+      },
+      { name: "twitter:image", content: "https://lorenallira.com.br/og-image.jpg" },
+    ],
+    links: [{ rel: "canonical", href: "https://lorenallira.com.br/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "MusicGroup",
+          name: "Lorena Llira",
+          url: "https://lorenallira.com.br/",
+          description:
+            "Atelier de composições autorais para momentos que merecem ser eternizados em música.",
+        }),
+      },
     ],
   }),
 });
