@@ -120,7 +120,7 @@ function QuantoCusta() {
   );
 }
 
-export const articleBySlug: Record<string, () => JSX.Element> = {
+export const articleBySlug: Record<string, () => ReactNode> = {
   "como-funciona-uma-musica-personalizada": ComoFunciona,
   "ideias-para-pedido-de-casamento": IdeiasPedido,
   "como-eternizar-momentos-com-musica": EternizarMomentos,
