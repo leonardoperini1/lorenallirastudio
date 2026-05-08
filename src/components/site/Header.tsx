@@ -3,10 +3,11 @@ import { Menu, X } from "lucide-react";
 import monogram from "@/assets/ll-monogram.png";
 
 const links = [
-  { href: "#inicio", label: "Início" },
-  { href: "#portfolio", label: "Portfólio" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#planos", label: "Planos" },
+  { href: "/#inicio", label: "Início" },
+  { href: "/#portfolio", label: "Portfólio" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#planos", label: "Planos" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export function Header() {
