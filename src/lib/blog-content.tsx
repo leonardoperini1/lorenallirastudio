@@ -120,9 +120,44 @@ function QuantoCusta() {
   );
 }
 
+function MusicaCasamento() {
+  return (
+    <>
+      <p>
+        A <strong>música personalizada para casamento</strong> é uma das formas mais marcantes de transformar a cerimônia em algo verdadeiramente único.
+        Diferente de escolher uma música pronta, uma <strong>canção personalizada</strong> conta a história real do casal — desde o primeiro encontro até o "sim".
+      </p>
+      <H2>Onde usar a música no casamento</H2>
+      <p>
+        Entrada da noiva, troca de alianças, primeira dança, valsa com os pais ou homenagem surpresa na recepção. Cada momento pode ter uma versão (vocal, instrumental ou playback).
+      </p>
+      <H2>Prazo ideal para encomendar</H2>
+      <p>
+        Recomendamos solicitar a <strong>música para casamento</strong> com no mínimo 4 a 6 semanas de antecedência. Isso garante tempo para briefing, escrita, aprovação da letra, gravação em estúdio e ensaios.
+      </p>
+      <H2>O que está incluso</H2>
+      <ul className="list-disc pl-6 space-y-2">
+        <li>Briefing emocional com o casal</li>
+        <li>Letra autoral com a história de vocês</li>
+        <li>Melodia exclusiva no estilo escolhido</li>
+        <li>Gravação profissional em estúdio</li>
+        <li>Versões adicionais (instrumental/playback)</li>
+      </ul>
+      <H2>Quanto custa</H2>
+      <p>
+        Para casamentos, o pacote mais indicado é o Sonata, a partir de R$ 897, que inclui liberação comercial e múltiplas versões.
+      </p>
+      <p>
+        Saiba mais sobre <Link to="/casamento" className="text-primary underline-offset-4 hover:underline">música para casamento</Link>.
+      </p>
+    </>
+  );
+}
+
 export const articleBySlug: Record<string, () => ReactNode> = {
   "como-funciona-uma-musica-personalizada": ComoFunciona,
   "ideias-para-pedido-de-casamento": IdeiasPedido,
   "como-eternizar-momentos-com-musica": EternizarMomentos,
   "quanto-custa-uma-composicao-personalizada": QuantoCusta,
+  "musica-personalizada-para-casamento": MusicaCasamento,
 };
