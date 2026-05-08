@@ -27,6 +27,30 @@ export const Route = createFileRoute("/pedido-de-casamento")({
       { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "https://lorenallira.com.br/pedido-de-casamento" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Início", item: "https://lorenallira.com.br/" },
+            { "@type": "ListItem", position: 2, name: "Pedido de Casamento", item: "https://lorenallira.com.br/pedido-de-casamento" },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Música para pedido de casamento",
+          provider: { "@type": "Organization", name: "Lorena Llira", url: "https://lorenallira.com.br/" },
+          areaServed: { "@type": "Country", name: "Brasil" },
+          url: "https://lorenallira.com.br/pedido-de-casamento",
+        }),
+      },
+    ],
   }),
 });
 
