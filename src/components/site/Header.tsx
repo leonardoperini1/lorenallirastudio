@@ -19,7 +19,7 @@ export function Header() {
   }, [open]);
 
   useEffect(() => {
-    const ids = links.map((l) => l.href.slice(1));
+    const ids = links.map((l) => l.href.replace("/#", "").replace("#", "")).filter((id) => !id.startsWith("/") && id.length > 0);
     const sections = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => !!el);
