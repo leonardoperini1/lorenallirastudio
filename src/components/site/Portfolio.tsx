@@ -134,8 +134,8 @@ export function Portfolio() {
 
   return (
     <section id="portfolio" className="relative py-[100px] overflow-hidden">
-      <div className="absolute inset-0 -z-10 opacity-[0.18] pointer-events-none">
-        <img src={heroRose} alt="" className="wind-bg h-full w-full object-cover" />
+      <div className="absolute inset-0 -z-10 opacity-[0.18] pointer-events-none" aria-hidden="true">
+        <img src={heroRose} alt="" loading="lazy" decoding="async" className="wind-bg h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
       </div>
 
