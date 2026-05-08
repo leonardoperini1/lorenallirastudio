@@ -4,14 +4,13 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import heroRose from "@/assets/hero-rose.jpg";
 import { AudioCard } from "./AudioCard";
 
-// IMPORTAÇÃO DOS VÍDEOS E DOS POSTERS (CAPAS) - EXTENSÕES CORRIGIDAS PARA .PNG
+// IMPORTAÇÃO DOS VÍDEOS E DOS POSTERS
 import p1 from "@/assets/portfolio-1.mp4";
 import p1poster from "@/assets/portfolio-1-poster.png"; 
 import p2 from "@/assets/portfolio-2.mp4";
 import p2poster from "@/assets/portfolio-2-poster.png"; 
 import p3 from "@/assets/portfolio-3.mp4";
 import p3poster from "@/assets/portfolio-3-poster.png"; 
-
 import p4 from "@/assets/portfolio-4.mp4";
 import p4poster from "@/assets/portfolio-4-poster.png";
 import p5 from "@/assets/portfolio-5.mp4";
@@ -80,6 +79,20 @@ export function Portfolio() {
   const userInteractedRef = useRef(false);
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  // SCHEMA PARA O GOOGLE INDEXAR OS VÍDEOS
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@graph": tracks.map((t) => ({
+      "@type": "VideoObject",
+      "name": `Música Personalizada: ${t.title}`,
+      "description": `Portfólio de composição musical personalizada para ${t.occasion} por Lorena LLira.`,
+      "thumbnailUrl": `https://lorenallira.com.br${t.posterFallback}`,
+      "uploadDate": "2024-05-08T08:00:00+00:00",
+      "contentUrl": `https://lorenallira.com.br${t.cover}`,
+      "embedUrl": "https://lorenallira.com.br#portfolio"
+    }))
+  };
+
   useEffect(() => {
     if (!embla) return;
     const onSelect = () => setSelected(embla.selectedScrollSnap());
@@ -103,18 +116,6 @@ export function Portfolio() {
     };
   }, [embla]);
 
-  useEffect(() => {
-    if (!embla) return;
-    const onSelect = () => {
-      if (!userInteractedRef.current) return;
-      setPlayingId(null);
-    };
-    embla.on("select", onSelect);
-    return () => {
-      embla.off("select", onSelect);
-    };
-  }, [embla]);
-
   const handlePlay = (id: string) => {
     userInteractedRef.current = true;
     if (autoplayRef.current) {
@@ -134,6 +135,12 @@ export function Portfolio() {
 
   return (
     <section id="portfolio" className="relative py-[100px] overflow-hidden">
+      {/* INJETANDO O SCHEMA DE VÍDEO PARA O GOOGLE */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
+
       <div className="absolute inset-0 -z-10 opacity-[0.18] pointer-events-none" aria-hidden="true">
         <img src={heroRose} alt="" loading="lazy" decoding="async" className="wind-bg h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/70 to-background" />
