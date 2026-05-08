@@ -9,8 +9,33 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PedidoDeCasamentoRouteImport } from './routes/pedido-de-casamento'
+import { Route as ComposicoesPersonalizadasRouteImport } from './routes/composicoes-personalizadas'
+import { Route as CasamentoRouteImport } from './routes/casamento'
+import { Route as AniversarioRouteImport } from './routes/aniversario'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PedidoDeCasamentoRoute = PedidoDeCasamentoRouteImport.update({
+  id: '/pedido-de-casamento',
+  path: '/pedido-de-casamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComposicoesPersonalizadasRoute =
+  ComposicoesPersonalizadasRouteImport.update({
+    id: '/composicoes-personalizadas',
+    path: '/composicoes-personalizadas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CasamentoRoute = CasamentoRouteImport.update({
+  id: '/casamento',
+  path: '/casamento',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AniversarioRoute = AniversarioRouteImport.update({
+  id: '/aniversario',
+  path: '/aniversario',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +44,88 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aniversario': typeof AniversarioRoute
+  '/casamento': typeof CasamentoRoute
+  '/composicoes-personalizadas': typeof ComposicoesPersonalizadasRoute
+  '/pedido-de-casamento': typeof PedidoDeCasamentoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aniversario': typeof AniversarioRoute
+  '/casamento': typeof CasamentoRoute
+  '/composicoes-personalizadas': typeof ComposicoesPersonalizadasRoute
+  '/pedido-de-casamento': typeof PedidoDeCasamentoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aniversario': typeof AniversarioRoute
+  '/casamento': typeof CasamentoRoute
+  '/composicoes-personalizadas': typeof ComposicoesPersonalizadasRoute
+  '/pedido-de-casamento': typeof PedidoDeCasamentoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/aniversario'
+    | '/casamento'
+    | '/composicoes-personalizadas'
+    | '/pedido-de-casamento'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/aniversario'
+    | '/casamento'
+    | '/composicoes-personalizadas'
+    | '/pedido-de-casamento'
+  id:
+    | '__root__'
+    | '/'
+    | '/aniversario'
+    | '/casamento'
+    | '/composicoes-personalizadas'
+    | '/pedido-de-casamento'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AniversarioRoute: typeof AniversarioRoute
+  CasamentoRoute: typeof CasamentoRoute
+  ComposicoesPersonalizadasRoute: typeof ComposicoesPersonalizadasRoute
+  PedidoDeCasamentoRoute: typeof PedidoDeCasamentoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/pedido-de-casamento': {
+      id: '/pedido-de-casamento'
+      path: '/pedido-de-casamento'
+      fullPath: '/pedido-de-casamento'
+      preLoaderRoute: typeof PedidoDeCasamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/composicoes-personalizadas': {
+      id: '/composicoes-personalizadas'
+      path: '/composicoes-personalizadas'
+      fullPath: '/composicoes-personalizadas'
+      preLoaderRoute: typeof ComposicoesPersonalizadasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/casamento': {
+      id: '/casamento'
+      path: '/casamento'
+      fullPath: '/casamento'
+      preLoaderRoute: typeof CasamentoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aniversario': {
+      id: '/aniversario'
+      path: '/aniversario'
+      fullPath: '/aniversario'
+      preLoaderRoute: typeof AniversarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +138,20 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AniversarioRoute: AniversarioRoute,
+  CasamentoRoute: CasamentoRoute,
+  ComposicoesPersonalizadasRoute: ComposicoesPersonalizadasRoute,
+  PedidoDeCasamentoRoute: PedidoDeCasamentoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
