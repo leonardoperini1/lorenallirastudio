@@ -29,7 +29,7 @@ export function Header() {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive("#" + visible.target.id);
+        if (visible) setActive("/#" + visible.target.id);
       },
       { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
     );
