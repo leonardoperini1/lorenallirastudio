@@ -7,6 +7,7 @@ import { Pricing } from "@/components/site/Pricing";
 import { SpacePromo } from "@/components/site/SpacePromo";
 import { Testimonials } from "@/components/site/Testimonials";
 import { FinalCTA } from "@/components/site/FinalCTA";
+import { FAQ, faqJsonLd } from "@/components/site/FAQ";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 import { useReveal } from "@/hooks/use-reveal";
@@ -95,6 +96,7 @@ function Index() {
       <Pricing />
       <SpacePromo />
       <Testimonials />
+      <FAQ />
       <FinalCTA />
       <Footer />
       <WhatsAppFloat />
