@@ -108,6 +108,8 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
           <img
             src={isPlaying ? cover : (posterFallback || cover)}
             alt={`Capa animada da composição ${title} — ${occasion}`}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
           />
         )}
@@ -116,6 +118,8 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
           <img
             src={cover}
             alt={`Capa da composição ${title} — ${occasion}`}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
           />
         )}
@@ -129,12 +133,14 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
           </div>
           <button
             onClick={toggle}
+            aria-label={isPlaying ? `Pausar ${title}` : `Tocar composição ${title}`}
+            aria-pressed={isPlaying}
             className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
           >
             {isPlaying ? (
-              <Pause size={16} fill="currentColor" />
+              <Pause size={16} fill="currentColor" aria-hidden="true" />
             ) : (
-              <Play size={16} fill="currentColor" className="ml-0.5" />
+              <Play size={16} fill="currentColor" className="ml-0.5" aria-hidden="true" />
             )}
           </button>
         </div>
