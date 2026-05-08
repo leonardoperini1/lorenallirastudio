@@ -173,16 +173,20 @@ export function Portfolio() {
           <div className="mt-12 flex items-center justify-center gap-6">
             <button
               onClick={() => embla?.scrollPrev()}
+              aria-label="Composição anterior"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
             >
-              <ArrowLeft size={18} />
+              <ArrowLeft size={18} aria-hidden="true" />
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2" role="tablist" aria-label="Selecionar composição">
               {snaps.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => embla?.scrollTo(i)}
+                  aria-label={`Ir para composição ${i + 1}`}
+                  aria-selected={i === selected}
+                  role="tab"
                   className={`h-2 rounded-full transition-all duration-300 ${
                     i === selected ? "w-8 bg-primary" : "w-2 bg-foreground/25"
                   }`}
@@ -192,9 +196,10 @@ export function Portfolio() {
 
             <button
               onClick={() => embla?.scrollNext()}
+              aria-label="Próxima composição"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
             >
-              <ArrowRight size={18} />
+              <ArrowRight size={18} aria-hidden="true" />
             </button>
           </div>
         </div>
