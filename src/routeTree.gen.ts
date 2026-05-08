@@ -14,6 +14,7 @@ import { Route as ComposicoesPersonalizadasRouteImport } from './routes/composic
 import { Route as CasamentoRouteImport } from './routes/casamento'
 import { Route as AniversarioRouteImport } from './routes/aniversario'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 
 const PedidoDeCasamentoRoute = PedidoDeCasamentoRouteImport.update({
   id: '/pedido-de-casamento',
@@ -41,6 +42,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -48,6 +54,7 @@ export interface FileRoutesByFullPath {
   '/casamento': typeof CasamentoRoute
   '/composicoes-personalizadas': typeof ComposicoesPersonalizadasRoute
   '/pedido-de-casamento': typeof PedidoDeCasamentoRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -55,6 +62,7 @@ export interface FileRoutesByTo {
   '/casamento': typeof CasamentoRoute
   '/composicoes-personalizadas': typeof ComposicoesPersonalizadasRoute
   '/pedido-de-casamento': typeof PedidoDeCasamentoRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -63,6 +71,7 @@ export interface FileRoutesById {
   '/casamento': typeof CasamentoRoute
   '/composicoes-personalizadas': typeof ComposicoesPersonalizadasRoute
   '/pedido-de-casamento': typeof PedidoDeCasamentoRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -72,6 +81,7 @@ export interface FileRouteTypes {
     | '/casamento'
     | '/composicoes-personalizadas'
     | '/pedido-de-casamento'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -79,6 +89,7 @@ export interface FileRouteTypes {
     | '/casamento'
     | '/composicoes-personalizadas'
     | '/pedido-de-casamento'
+    | '/blog'
   id:
     | '__root__'
     | '/'
@@ -86,6 +97,7 @@ export interface FileRouteTypes {
     | '/casamento'
     | '/composicoes-personalizadas'
     | '/pedido-de-casamento'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,6 +106,7 @@ export interface RootRouteChildren {
   CasamentoRoute: typeof CasamentoRoute
   ComposicoesPersonalizadasRoute: typeof ComposicoesPersonalizadasRoute
   PedidoDeCasamentoRoute: typeof PedidoDeCasamentoRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -133,6 +146,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -142,6 +162,7 @@ const rootRouteChildren: RootRouteChildren = {
   CasamentoRoute: CasamentoRoute,
   ComposicoesPersonalizadasRoute: ComposicoesPersonalizadasRoute,
   PedidoDeCasamentoRoute: PedidoDeCasamentoRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
