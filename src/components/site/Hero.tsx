@@ -9,10 +9,12 @@ export function Hero() {
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <img
           src={heroRose}
-          alt="Rosa pintada feita de partituras musicais"
+          alt="Rosa pintada feita de partituras musicais — composição personalizada Lorena Llira"
           className="wind-bg h-full w-full object-cover opacity-90"
           width={1920}
           height={1280}
+          fetchPriority="high"
+          decoding="async"
         />
         {/* Camadas de gradiente para melhorar contraste geral */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/20 to-background" />
