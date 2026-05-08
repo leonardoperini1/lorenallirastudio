@@ -48,6 +48,16 @@ export const posts: BlogPost[] = [
     excerpt:
       "Quanto custa uma composição personalizada? Veja o que está incluso, os pacotes disponíveis e como escolher o melhor para o seu momento.",
   },
+  {
+    slug: "musica-personalizada-para-casamento",
+    title: "Música personalizada para casamento: guia completo",
+    description:
+      "Tudo sobre música personalizada para casamento: entrada da noiva, primeira dança, prazos e como encomendar uma canção autoral.",
+    date: "2026-05-05",
+    readingTime: "6 min",
+    excerpt:
+      "Música personalizada para casamento transforma a cerimônia em um momento único. Veja como funciona, prazos e ideias para entrada e primeira dança.",
+  },
 ];
 
 export function getPost(slug: string): BlogPost | undefined {
