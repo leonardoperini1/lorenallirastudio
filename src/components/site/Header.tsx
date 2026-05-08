@@ -40,7 +40,7 @@ export function Header() {
     <header className="fixed inset-x-0 top-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
       <div className="mx-auto flex h-24 max-w-[1440px] items-center px-6 md:px-10 lg:px-16 relative">
         <a href="#inicio" className="flex items-center gap-3 group">
-          <img src={monogram} alt="Lorena LLira" className="h-[4.55rem] w-[4.55rem] shrink-0" width={73} height={73} />
+          <img src={monogram} alt="Lorena LLira" className="h-14 w-14 shrink-0" width={56} height={56} />
           <span className="font-serif text-xl md:text-xl tracking-luxury text-foreground leading-none">
             Lorena <span className="text-primary">LL</span>ira
           </span>
