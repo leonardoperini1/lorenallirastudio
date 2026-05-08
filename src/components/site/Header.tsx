@@ -3,10 +3,11 @@ import { Menu, X } from "lucide-react";
 import monogram from "@/assets/ll-monogram.png";
 
 const links = [
-  { href: "#inicio", label: "Início" },
-  { href: "#portfolio", label: "Portfólio" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#planos", label: "Planos" },
+  { href: "/#inicio", label: "Início" },
+  { href: "/#portfolio", label: "Portfólio" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#planos", label: "Planos" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export function Header() {
@@ -18,7 +19,7 @@ export function Header() {
   }, [open]);
 
   useEffect(() => {
-    const ids = links.map((l) => l.href.slice(1));
+    const ids = links.map((l) => l.href.replace("/#", "").replace("#", "")).filter((id) => !id.startsWith("/") && id.length > 0);
     const sections = ids
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => !!el);
@@ -28,7 +29,7 @@ export function Header() {
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive("#" + visible.target.id);
+        if (visible) setActive("/#" + visible.target.id);
       },
       { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
     );
