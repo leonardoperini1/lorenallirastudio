@@ -34,11 +34,14 @@ export function Footer() {
           </div>
 
           <div>
-            <div className="text-[0.65rem] tracking-editorial uppercase text-primary mb-4">Navegação</div>
+            <div className="text-[0.65rem] tracking-editorial uppercase text-primary mb-4">Serviços</div>
             <ul className="space-y-2 text-sm">
-              <li><a href="#portfolio" className="hover:text-primary transition-colors">Portfólio</a></li>
-              <li><a href="#planos" className="hover:text-primary transition-colors">Planos</a></li>
-              <li><a href="#como-funciona" className="hover:text-primary transition-colors">Como funciona</a></li>
+              <li><a href="/composicoes-personalizadas" className="hover:text-primary transition-colors">Composições personalizadas</a></li>
+              <li><a href="/casamento" className="hover:text-primary transition-colors">Música para casamento</a></li>
+              <li><a href="/pedido-de-casamento" className="hover:text-primary transition-colors">Pedido de casamento</a></li>
+              <li><a href="/aniversario" className="hover:text-primary transition-colors">Aniversário & homenagens</a></li>
+              <li><a href="/blog" className="hover:text-primary transition-colors">Blog</a></li>
+              <li><a href="/#planos" className="hover:text-primary transition-colors">Planos</a></li>
             </ul>
           </div>
 
