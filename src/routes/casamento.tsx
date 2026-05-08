@@ -27,6 +27,30 @@ export const Route = createFileRoute("/casamento")({
       { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "https://lorenallira.com.br/casamento" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Início", item: "https://lorenallira.com.br/" },
+            { "@type": "ListItem", position: 2, name: "Música para Casamento", item: "https://lorenallira.com.br/casamento" },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Música para casamento personalizada",
+          provider: { "@type": "Organization", name: "Lorena Llira", url: "https://lorenallira.com.br/" },
+          areaServed: { "@type": "Country", name: "Brasil" },
+          url: "https://lorenallira.com.br/casamento",
+        }),
+      },
+    ],
   }),
 });
 

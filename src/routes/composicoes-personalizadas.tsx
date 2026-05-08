@@ -27,6 +27,30 @@ export const Route = createFileRoute("/composicoes-personalizadas")({
       { property: "og:type", content: "website" },
     ],
     links: [{ rel: "canonical", href: "https://lorenallira.com.br/composicoes-personalizadas" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Início", item: "https://lorenallira.com.br/" },
+            { "@type": "ListItem", position: 2, name: "Composições Personalizadas", item: "https://lorenallira.com.br/composicoes-personalizadas" },
+          ],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "Composições musicais personalizadas",
+          provider: { "@type": "Organization", name: "Lorena Llira", url: "https://lorenallira.com.br/" },
+          areaServed: { "@type": "Country", name: "Brasil" },
+          url: "https://lorenallira.com.br/composicoes-personalizadas",
+        }),
+      },
+    ],
   }),
 });
 
