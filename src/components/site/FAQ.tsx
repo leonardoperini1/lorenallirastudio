@@ -32,7 +32,7 @@ export function FAQ() {
         <div className="reveal max-w-3xl mb-16">
           <span className="eyebrow block mb-6">Perguntas frequentes</span>
           <h2 className="font-serif text-5xl lg:text-6xl leading-[1] tracking-[-0.015em]">
-            Tudo o que você quer<br /><em className="italic font-light text-primary">saber</em>
+            Tudo o que você quer <em className="italic font-light text-primary">saber</em>
           </h2>
         </div>
 
