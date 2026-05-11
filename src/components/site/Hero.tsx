@@ -37,7 +37,7 @@ export function Hero() {
                style={{ 
                  textShadow: '0px 2px 4px rgba(255, 255, 255, 0.5), 0px 0px 20px rgba(255, 255, 255, 0.3)' 
                }}>
-              Composições 100% humana e personalizadas, escrita a mão e em todos os gêneros musicais
+              Composições 100% humanas e personalizadas, escrita a mão e em todos os gêneros musicais
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-5">
