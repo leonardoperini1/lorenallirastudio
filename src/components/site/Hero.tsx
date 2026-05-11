@@ -1,69 +1,74 @@
 import heroRose from "@/assets/hero-rose.jpg";
+import { waLink } from "@/lib/whatsapp";
 
-const WA = "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20composi%C3%A7%C3%A3o%20personalizada";
+const WA = waLink();
 
 export function Hero() {
   return (
-    <section id="inicio" className="relative min-h-screen pt-28 overflow-hidden">
-      {/* Painted background image, soft */}
+    <section id="inicio" className="relative min-h-[110vh] lg:min-h-screen pt-[100px] pb-[100px] overflow-hidden flex flex-col justify-center">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <img
           src={heroRose}
-          alt="Rosa pintada feita de partituras musicais"
+          alt="Rosa pintada feita de partituras musicais — composição personalizada Lorena Llira"
           className="wind-bg h-full w-full object-cover opacity-90"
           width={1920}
           height={1280}
+          fetchPriority="high"
+          decoding="async"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/30 to-transparent" />
+        {/* Camadas de gradiente para melhorar contraste geral */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/20 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent" />
       </div>
 
-      <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16 grid lg:grid-cols-12 gap-10 items-center min-h-[calc(100vh-7rem)]">
-        <div className="lg:col-span-7 reveal">
-          <span className="eyebrow block mb-8">Atelier de Composição · Desde 2018</span>
+      <div className="relative mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16 w-full">
+        <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-8 xl:col-span-7 reveal">
+            <span className="eyebrow block mb-6 text-primary/80 font-medium tracking-[0.2em]">Atelier de Composição · Desde 2018</span>
 
-          <h1 className="font-serif text-[3.25rem] sm:text-[4.5rem] lg:text-[6.25rem] xl:text-[7rem] leading-[0.98] tracking-[-0.02em] text-foreground">
-            Transforme<br />
-            <em className="italic font-light text-primary">sentimentos</em><br />
-            em música
-          </h1>
+            <h1 className="font-serif text-[3.25rem] sm:text-[4.5rem] lg:text-[5.5rem] xl:text-[6.5rem] leading-[0.95] tracking-[-0.02em] text-foreground">
+              Transforme<br />
+              <em className="italic font-light text-primary">sentimentos</em><br />
+              em música
+            </h1>
 
-          <p className="mt-8 max-w-xl text-lg lg:text-xl leading-[1.7] text-foreground/75 font-light tracking-luxury">
-            Composições personalizadas, escritas à mão e em todos os gêneros
-            musicais para eternizar os seus momentos do seu jeito — casamentos,
-            pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
-          </p>
+            {/* Ajuste de legibilidade: font-medium e drop-shadow suave */}
+            <p className="mt-8 max-w-2xl text-lg lg:text-xl leading-[1.6] text-foreground font-normal tracking-wide"
+               style={{ 
+                 textShadow: '0px 2px 4px rgba(255, 255, 255, 0.5), 0px 0px 20px rgba(255, 255, 255, 0.3)' 
+               }}>
+              Composições personalizadas, escritas à mão e em todos os gêneros
+              musicais para eternizar os seus momentos do seu jeito — casamentos, 
+              pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
+            </p>
 
-          <div className="mt-12 flex flex-wrap items-center gap-5">
-            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              Encomendar minha música
-            </a>
-            <a href="#portfolio" className="btn-ghost">
-              Ouvir o portfólio
-            </a>
+            <div className="mt-10 flex flex-wrap items-center gap-5">
+              <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary px-10">
+                Encomendar minha música
+              </a>
+              <a href="#portfolio" className="btn-ghost border-foreground/20">
+                Ouvir o portfólio
+              </a>
+            </div>
+
+            <div className="mt-20 grid grid-cols-3 gap-4 border-t border-foreground/10 pt-10 max-w-2xl">
+              {[
+                ["+ 380", "Composições autorais"],
+                ["7 dias", "Entrega média"],
+                ["100%", "Original"],
+              ].map(([n, l]) => (
+                <div key={l} className="flex flex-col gap-1">
+                  <div className="font-serif text-2xl sm:text-3xl xl:text-4xl text-foreground whitespace-nowrap">{n}</div>
+                  <div className="text-[0.6rem] sm:text-[0.65rem] tracking-[0.1em] uppercase text-muted-foreground/80 leading-tight max-w-[80px] sm:max-w-none">
+                    {l}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-16 flex flex-wrap gap-10 lg:gap-14 border-t border-foreground/10 pt-8 max-w-xl">
-            {[
-              ["+ 380", "composições autorais"],
-              ["7 dias", "entrega média"],
-              ["100%", "feito à mão"],
-            ].map(([n, l]) => (
-              <div key={l}>
-                <div className="font-serif text-3xl text-foreground">{n}</div>
-                <div className="text-xs tracking-editorial uppercase text-muted-foreground mt-1">{l}</div>
-              </div>
-            ))}
-          </div>
+          <div className="hidden lg:block lg:col-span-4 xl:col-span-5" />
         </div>
-
-        <div className="hidden lg:block lg:col-span-5" />
-      </div>
-
-      {/* Scroll cue */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3 text-foreground/50">
-        <span className="text-[0.65rem] tracking-editorial uppercase">Role para descobrir</span>
-        <span className="block h-10 w-px bg-foreground/30 animate-pulse" />
       </div>
     </section>
   );

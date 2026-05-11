@@ -4,31 +4,31 @@ const steps = [
   {
     icon: MessageCircle,
     n: "01",
-    title: "Conversa íntima",
-    text: "Tudo começa com uma chamada de 30 minutos. Você conta a história, mostra fotos, lembra cheiros e palavras. Nós escutamos.",
+    title: "Conversa próxima",
+    text: "Tudo começa com uma chamada de 30 minutos. Você conta a história, mostra fotos, lembra cheiros e palavras, e nós só escutamos",
   },
   {
     icon: Feather,
     n: "02",
     title: "Escrita & melodia",
-    text: "Compomos letra e melodia à mão, em rascunhos. Você recebe uma prévia em voz e violão para ajustar cada verso.",
+    text: "Cada criação é única — podendo ser desenvolvida em diferentes idiomas e estilos, com elementos como mensagens faladas e variações da própria canção",
   },
   {
     icon: Disc3,
     n: "03",
     title: "Estúdio & entrega",
-    text: "Gravamos em estúdio com músicos reais, mixamos, masterizamos. Você recebe áudio em alta, partituras e letra emoldurada.",
+    text: "A entrega pode incluir versões adicionais, playback´s e a letra apresentada como uma lembrança física, emoldurada em forma de carta ou cartão",
   },
 ];
 
 export function HowItWorks() {
   return (
-    <section id="como-funciona" className="relative py-32 lg:py-44">
+    <section id="como-funciona" className="relative py-[100px]">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
         <div className="reveal max-w-3xl mb-20 lg:mb-28">
           <span className="eyebrow block mb-6">Como funciona</span>
           <h2 className="font-serif text-5xl lg:text-7xl leading-[1] tracking-[-0.015em]">
-            Do primeiro suspiro<br />à <em className="italic font-light text-primary">trilha final</em>.
+            Do primeiro suspiro<br />à <em className="italic font-light text-primary">trilha final</em>
           </h2>
         </div>
 

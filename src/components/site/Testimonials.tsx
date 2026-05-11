@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const testimonials = [
   { name: "Mardielli", text: "Uauuu! Letra e melodia lindíssima poetisa! Ficou divina sua canção! Aplausos! Beijo e feliz noite" },
@@ -33,10 +34,16 @@ function Card({ name, text }: { name: string; text: string }) {
   );
 }
 
-function Slider({ groupSize, gridClass }: { groupSize: number; gridClass: string }) {
+export function Testimonials() {
+  const isMobile = useIsMobile();
+  const groupSize = isMobile ? 1 : 2;
+  const gridClass = isMobile ? "grid grid-cols-1 gap-6" : "grid grid-cols-2 gap-6 lg:gap-8";
+
   const [emblaRef, embla] = useEmblaCarousel({ loop: true });
   const [selected, setSelected] = useState(0);
   const [snaps, setSnaps] = useState<number[]>([]);
+  const [paused, setPaused] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const slides: typeof testimonials[] = [];
   for (let i = 0; i < testimonials.length; i += groupSize) {
@@ -48,49 +55,32 @@ function Slider({ groupSize, gridClass }: { groupSize: number; gridClass: string
     const onSelect = () => setSelected(embla.selectedScrollSnap());
     setSnaps(embla.scrollSnapList());
     embla.on("select", onSelect);
-    embla.on("reInit", () => setSnaps(embla.scrollSnapList()));
+    embla.on("reInit", () => {
+      setSnaps(embla.scrollSnapList());
+      onSelect();
+    });
     onSelect();
   }, [embla]);
 
-  return (
-    <div className="relative reveal">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex">
-          {slides.map((group, idx) => (
-            <div key={idx} className="shrink-0 grow-0 basis-full px-1">
-              <div className={gridClass}>
-                {group.map((t) => <Card key={t.name} {...t} />)}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+  // Reinit when groupSize changes (mobile <-> desktop)
+  useEffect(() => {
+    embla?.reInit();
+  }, [embla, groupSize]);
 
-      <div className="mt-12 flex items-center justify-center gap-6">
-        <button onClick={() => embla?.scrollPrev()} aria-label="Anterior"
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors">
-          <ArrowLeft size={18} />
-        </button>
-        <div className="flex items-center gap-2">
-          {snaps.map((_, i) => (
-            <button key={i} onClick={() => embla?.scrollTo(i)} aria-label={`Slide ${i + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 ${
-                i === selected ? "w-8 bg-primary" : "w-2 bg-foreground/25 hover:bg-foreground/50"
-              }`} />
-          ))}
-        </div>
-        <button onClick={() => embla?.scrollNext()} aria-label="Próximo"
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors">
-          <ArrowRight size={18} />
-        </button>
-      </div>
-    </div>
-  );
-}
+  // Auto-transition every 5s, paused on hover
+  useEffect(() => {
+    if (!embla) return;
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      if (!paused) embla.scrollNext();
+    }, 5000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [embla, paused]);
 
-export function Testimonials() {
   return (
-    <section id="depoimentos" className="relative py-32 lg:py-44 bg-muted/40">
+    <section id="depoimentos" className="relative py-[100px] bg-muted/40">
       <div className="mx-auto max-w-[1440px] px-6 md:px-10 lg:px-16">
         <div className="reveal text-center max-w-3xl mx-auto mb-16 lg:mb-20">
           <span className="eyebrow block mb-6">Depoimentos</span>
@@ -99,7 +89,44 @@ export function Testimonials() {
           </h2>
         </div>
 
-        <Slider groupSize={2} gridClass="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8" />
+        <div
+          className="relative reveal"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+        >
+          <div className="overflow-hidden" ref={emblaRef}>
+            <div className="flex">
+              {slides.map((group, idx) => (
+                <div key={idx} className="shrink-0 grow-0 basis-full px-1">
+                  <div className={gridClass}>
+                    {group.map((t) => <Card key={t.name} {...t} />)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 flex items-center justify-center gap-6">
+            <button onClick={() => embla?.scrollPrev()} aria-label="Anterior"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors">
+              <ArrowLeft size={18} />
+            </button>
+            <div className="flex items-center gap-2">
+              {snaps.map((_, i) => (
+                <button key={i} onClick={() => embla?.scrollTo(i)} aria-label={`Slide ${i + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    i === selected ? "w-8 bg-primary" : "w-2 bg-foreground/25 hover:bg-foreground/50"
+                  }`} />
+              ))}
+            </div>
+            <button onClick={() => embla?.scrollNext()} aria-label="Próximo"
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors">
+              <ArrowRight size={18} />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

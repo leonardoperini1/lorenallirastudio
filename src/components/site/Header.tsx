@@ -3,50 +3,66 @@ import { Menu, X } from "lucide-react";
 import monogram from "@/assets/ll-monogram.png";
 
 const links = [
-  { href: "#inicio", label: "Início" },
-  { href: "#portfolio", label: "Portfólio" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#depoimentos", label: "Depoimentos" },
-  { href: "#contato", label: "Contato" },
+  { href: "/#inicio", label: "Início" },
+  { href: "/#portfolio", label: "Portfólio" },
+  { href: "/#como-funciona", label: "Como funciona" },
+  { href: "/#planos", label: "Planos" },
+  { href: "/blog", label: "Blog" },
 ];
-
-const WA = "https://wa.me/5500000000000?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20composi%C3%A7%C3%A3o%20personalizada";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>("#inicio");
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
   }, [open]);
 
+  useEffect(() => {
+    const ids = links.map((l) => l.href.replace("/#", "").replace("#", "")).filter((id) => !id.startsWith("/") && id.length > 0);
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!sections.length) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive("/#" + visible.target.id);
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className="glass-header fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto flex h-20 max-w-[1440px] items-center justify-between px-6 md:px-10 lg:px-16">
-        <a href="#inicio" className="flex items-center gap-2.5 group">
-          <img src={monogram} alt="Lorena LLira" className="h-7 w-7 md:h-8 md:w-8 shrink-0" width={32} height={32} />
-          <span className="font-serif text-lg md:text-xl tracking-luxury text-foreground leading-none">
+    <header className="fixed inset-x-0 top-0 z-50 bg-background/95 backdrop-blur-md border-b border-foreground/5">
+      <div className="mx-auto flex h-24 max-w-[1440px] items-center px-6 md:px-10 lg:px-16 relative">
+        <a href="#inicio" className="flex items-center gap-3 group">
+          <img src={monogram} alt="Lorena LLira" className="h-14 w-14 shrink-0" width={56} height={56} />
+          <span className="font-serif text-xl md:text-xl tracking-luxury text-foreground leading-none">
             Lorena <span className="text-primary">LL</span>ira
           </span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-10">
+        <nav className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-[0.78rem] tracking-editorial uppercase font-medium text-foreground/80 hover:text-primary transition-colors duration-300"
+              className={`text-[0.78rem] tracking-editorial uppercase font-medium hover:text-primary transition-colors duration-300 ${
+                active === l.href ? "text-primary" : "text-foreground/80"
+              }`}
             >
               {l.label}
             </a>
           ))}
         </nav>
 
-        <a href={WA} target="_blank" rel="noopener noreferrer" className="hidden lg:inline-flex btn-primary text-[0.72rem] !py-3 !px-6">
-          Falar no WhatsApp
-        </a>
-
         <button
-          className="lg:hidden flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20"
+          className="lg:hidden absolute right-6 md:right-10 flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20"
           onClick={() => setOpen(!open)}
           aria-label="Menu"
         >
@@ -55,21 +71,18 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden absolute inset-x-0 top-20 glass-header border-t border-foreground/5 px-6 py-8 animate-fade-in">
+        <div className="lg:hidden absolute inset-x-0 top-24 bg-background/98 border-t border-foreground/5 px-6 py-8 animate-fade-in shadow-xl">
           <nav className="flex flex-col gap-6">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-base tracking-luxury uppercase font-medium text-foreground"
+                className={`text-base tracking-luxury uppercase font-medium ${active === l.href ? "text-primary" : "text-foreground"}`}
               >
                 {l.label}
               </a>
             ))}
-            <a href={WA} target="_blank" rel="noopener noreferrer" className="btn-primary mt-4 self-start">
-              Falar no WhatsApp
-            </a>
           </nav>
         </div>
       )}
