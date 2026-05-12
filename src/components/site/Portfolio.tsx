@@ -133,6 +133,13 @@ export function Portfolio() {
 
   const handlePause = (id: string) => {
     setPlayingId((cur) => (cur === id ? null : cur));
+    userInteractedRef.current = false;
+    if (embla) {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+      autoplayRef.current = setInterval(() => {
+        if (!userInteractedRef.current) embla.scrollNext();
+      }, 6000);
+    }
   };
 
   return (
