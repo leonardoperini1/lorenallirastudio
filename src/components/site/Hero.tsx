@@ -37,9 +37,7 @@ export function Hero() {
                style={{ 
                  textShadow: '0px 2px 4px rgba(255, 255, 255, 0.5), 0px 0px 20px rgba(255, 255, 255, 0.3)' 
                }}>
-              Composições personalizadas, escritas à mão e em todos os gêneros
-              musicais para eternizar os seus momentos do seu jeito — casamentos, 
-              pedidos, aniversários e despedidas que merecem uma trilha sonora própria.
+              Composições 100% humanas, personalizadas e escritas à mão
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-5">
