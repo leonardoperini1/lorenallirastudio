@@ -4,7 +4,7 @@ import { waLink } from "@/lib/whatsapp";
 const plans = [
   {
     name: "Prelúdio",
-    price: "R$ 249",
+    price: "R$ 14",
     priceFrom: false,
     tagline: "A essência da sua história em forma de canção",
     features: [
@@ -17,7 +17,7 @@ const plans = [
   },
   {
     name: "Intermezzo",
-    price: "R$ 449",
+    price: "R$ 249",
     priceFrom: false,
     tagline: "Quando a história pede mais presença",
     features: [
@@ -31,7 +31,7 @@ const plans = [
   },
   {
     name: "Sonata",
-    price: "R$ 897",
+    price: "R$ 679",
     priceFrom: true,
     tagline: "A experiência completa da sua canção",
     features: [

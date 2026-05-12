@@ -39,7 +39,7 @@ export function SpacePromo() {
           {/* Desconto MEGA destacado */}
           <div className="mb-8">
             <div className="font-serif text-[8rem] md:text-[12rem] leading-[0.85] tracking-[-0.04em] font-light">
-              50<span className="text-5xl md:text-7xl align-top">%</span>
+              30<span className="text-5xl md:text-7xl align-top">%</span>
             </div>
             <div className="font-serif italic text-3xl md:text-5xl -mt-4">
               off
