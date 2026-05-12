@@ -125,7 +125,9 @@ export function Portfolio() {
     setPlayingId(id);
     const idx = tracks.findIndex((t) => t.id === id);
     if (idx >= 0 && embla && embla.selectedScrollSnap() !== idx) {
-      embla.scrollTo(idx);
+      if (window.innerWidth < 1024) {
+        embla.scrollTo(idx);
+      }
     }
   };
 
