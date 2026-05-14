@@ -1,3 +1,4 @@
+```tsx
 import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -20,52 +21,52 @@ import p6poster from "@/assets/portfolio-6-poster.png";
 
 const tracks = [
   {
-    id: \"rafaella\",
+    id: "rafaella",
     cover: p4,
     posterFallback: p4poster,
-    title: \"Rafaella\",
-    occasion: \"Debutante\",
-    src: \"/audio/rafaella.mp3\",
+    title: "Rafaella",
+    occasion: "Debutante",
+    src: "/audio/rafaella.mp3",
   },
   {
-    id: \"por-voce\",
+    id: "por-voce",
     cover: p6,
     posterFallback: p6poster,
-    title: \"Por você\",
-    occasion: \"Poesia musicada\",
-    src: \"/audio/por-voce.mp3\",
+    title: "Por você",
+    occasion: "Poesia musicada",
+    src: "/audio/por-voce.mp3",
   },
   {
-    id: \"casamento\",
+    id: "casamento",
     cover: p2,
     posterFallback: p2poster,
-    title: \"Casamento dos sonhos\",
-    occasion: \"Casamento\",
-    src: \"/audio/casamento-dos-sonhos.mp3\",
+    title: "Casamento dos sonhos",
+    occasion: "Casamento",
+    src: "/audio/casamento-dos-sonhos.mp3",
   },
   {
-    id: \"e-um-menino\",
+    id: "e-um-menino",
     cover: p5,
     posterFallback: p5poster,
-    title: \"É um menino!\",
-    occasion: \"Chá revelação\",
-    src: \"/audio/e-um-menino.mp3\",
+    title: "É um menino!",
+    occasion: "Chá revelação",
+    src: "/audio/e-um-menino.mp3",
   },
   {
-    id: \"eu-te-vi\",
+    id: "eu-te-vi",
     cover: p3,
     posterFallback: p3poster,
-    title: \"Eu te vi\",
-    occasion: \"Dia das mães\",
-    src: \"/audio/eu-te-vi.mp3\",
+    title: "Eu te vi",
+    occasion: "Dia das mães",
+    src: "/audio/eu-te-vi.mp3",
   },
   {
-    id: \"ll-vereadora\",
+    id: "ll-vereadora",
     cover: p1,
     posterFallback: p1poster,
-    title: \"LL para vereadora\",
-    occasion: \"Jingle\",
-    src: \"/audio/ll-para-vereadora.mp3\",
+    title: "LL para vereadora",
+    occasion: "Jingle",
+    src: "/audio/ll-para-vereadora.mp3",
   },
 ];
 
@@ -77,7 +78,6 @@ export function Portfolio() {
   const userInteractedRef = useRef(false);
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // SCHEMA PARA O GOOGLE INDEXAR OS VÍDEOS
   const videoSchema = {
     "@context": "https://schema.org",
     "@graph": tracks.map((t) => ({
@@ -142,7 +142,6 @@ export function Portfolio() {
 
   return (
     <section id="portfolio" className="relative py-[100px] overflow-hidden">
-      {/* INJETANDO O SCHEMA DE VÍDEO PARA O GOOGLE */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
@@ -187,20 +186,16 @@ export function Portfolio() {
           <div className="mt-12 flex items-center justify-center gap-6">
             <button
               onClick={() => embla?.scrollPrev()}
-              aria-label="Composição anterior"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
             >
-              <ArrowLeft size={18} aria-hidden="true" />
+              <ArrowLeft size={18} />
             </button>
 
-            <div className="flex items-center gap-2" role="tablist" aria-label="Selecionar composição">
+            <div className="flex items-center gap-2">
               {snaps.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => embla?.scrollTo(i)}
-                  aria-label={`Ir para composição ${i + 1}`}
-                  aria-selected={i === selected}
-                  role="tab"
                   className={`h-2 rounded-full transition-all duration-300 ${
                     i === selected ? "w-8 bg-primary" : "w-2 bg-foreground/25"
                   }`}
@@ -210,10 +205,9 @@ export function Portfolio() {
 
             <button
               onClick={() => embla?.scrollNext()}
-              aria-label="Próxima composição"
               className="flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 hover:bg-foreground hover:text-background transition-colors"
             >
-              <ArrowRight size={18} aria-hidden="true" />
+              <ArrowRight size={18} />
             </button>
           </div>
         </div>
@@ -221,3 +215,4 @@ export function Portfolio() {
     </section>
   );
 }
+```

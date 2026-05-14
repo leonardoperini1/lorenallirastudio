@@ -1,6 +1,10 @@
-import { useRef, useEffect, useState } from \"react\";
-import { Play, Pause } from \"lucide-react\";
-import { cn } from \"@/lib/utils\";
+<<<<<<< HEAD
+// ANTIGRAVITY_SYNC_TOKEN: 2026-05-13_22:10
+=======
+>>>>>>> 5e383073471fad0218b57e53cab3e1541daa7c4f
+import { useRef, useEffect, useState } from "react";
+import { Play, Pause } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Props {
   id: string;
@@ -15,14 +19,14 @@ interface Props {
   onPause: (id: string) => void;
 }
 
-function getMediaType(cover: string): \"video\" | \"gif\" | \"image\" {
+function getMediaType(cover: string): "video" | "gif" | "image" {
   const lower = cover.toLowerCase();
-  if (lower.endsWith(\".mp4\") || lower.includes(\".mp4\")) return \"video\";
-  if (lower.endsWith(\".gif\") || lower.includes(\".gif\")) return \"gif\";
-  return \"image\";
+  if (lower.endsWith(".mp4") || lower.includes(".mp4")) return "video";
+  if (lower.endsWith(".gif") || lower.includes(".gif")) return "gif";
+  return "image";
 }
 
-export function AudioCard({ id, cover, posterFallback, title, occasion, src, objectPosition = \"center 25%\", isPlaying, onPlay, onPause }: Props) {
+export function AudioCard({ id, cover, posterFallback, title, occasion, src, objectPosition = "center 25%", isPlaying, onPlay, onPause }: Props) {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -31,7 +35,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
 
   const mediaType = getMediaType(cover);
 
-  // 1. Controle de tempo e progresso do áudio
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
@@ -46,21 +49,19 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
       setCurrent(0);
     };
     const onMeta = () => setDuration(a.duration || 0);
-    a.addEventListener(\"timeupdate\", onTime);
-    a.addEventListener(\"ended\", onEnd);
-    a.addEventListener(\"loadedmetadata\", onMeta);
+    a.addEventListener("timeupdate", onTime);
+    a.addEventListener("ended", onEnd);
+    a.addEventListener("loadedmetadata", onMeta);
     return () => {
-      a.removeEventListener(\"timeupdate\", onTime);
-      a.removeEventListener(\"ended\", onEnd);
-      a.removeEventListener(\"loadedmetadata\", onMeta);
+      a.removeEventListener("timeupdate", onTime);
+      a.removeEventListener("ended", onEnd);
+      a.removeEventListener("loadedmetadata", onMeta);
     };
   }, [id, onPause]);
 
-  // 2. Sincronização Play/Pause (Áudio e Vídeo juntos)
   useEffect(() => {
     const a = audioRef.current;
     const v = videoRef.current;
-
     if (isPlaying) {
       if (a) a.play().catch(() => {});
       if (v) v.play().catch(() => {});
@@ -76,18 +77,22 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
   };
 
   const fmt = (s: number) => {
-    if (!isFinite(s)) return \"0:00\";
+    if (!isFinite(s)) return "0:00";
     const m = Math.floor(s / 60);
     const r = Math.floor(s % 60);
-    return `${m}:${String(r).padStart(2, \"0\")}`;
+    return `${m}:${String(r).padStart(2, "0")}`;
   };
 
   return (
-    <article className=\"group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full border border-foreground/5\">
-      {src && <audio ref={audioRef} src={src} preload=\"auto\" loop />}
+    <article className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full border border-foreground/5">
+      {src && <audio ref={audioRef} src={src} preload="auto" loop />}
 
-      <div className=\"relative aspect-square overflow-hidden bg-muted\">
-        {mediaType === \"video\" && (
+<<<<<<< HEAD
+      <div className="relative w-full aspect-square overflow-hidden bg-muted">
+=======
+      <div className="relative aspect-square overflow-hidden bg-muted">
+>>>>>>> 5e383073471fad0218b57e53cab3e1541daa7c4f
+        {mediaType === "video" && (
           <>
             <video
               ref={videoRef}
@@ -97,7 +102,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
               playsInline
               loop
               preload="auto"
-              aria-label={`Vídeo da composição ${title} — ${occasion}`}
               className="absolute inset-0 h-full w-full object-cover"
               style={{ objectPosition }}
             />
@@ -105,7 +109,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
               <img
                 src={posterFallback}
                 alt=""
-                aria-hidden="true"
                 className={cn(
                   "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
                   isPlaying ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -119,9 +122,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
         {mediaType === "gif" && (
           <img
             src={isPlaying ? cover : (posterFallback || cover)}
-            alt={`Capa animada da composição ${title} — ${occasion}`}
-            loading="lazy"
-            decoding="async"
+            alt=""
             className="absolute inset-0 h-full w-full object-cover"
             style={{ objectPosition }}
           />
@@ -130,9 +131,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
         {mediaType === "image" && (
           <img
             src={cover}
-            alt={`Capa da composição ${title} — ${occasion}`}
-            loading="lazy"
-            decoding="async"
+            alt=""
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
             style={{ objectPosition }}
           />
@@ -147,27 +146,33 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
           </div>
           <button
             onClick={toggle}
+<<<<<<< HEAD
+            className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
+          >
+            {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
+=======
             aria-label={isPlaying ? `Pausar ${title}` : `Tocar composição ${title}`}
             aria-pressed={isPlaying}
-            className=\"shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110\"
+            className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
           >
             {isPlaying ? (
-              <Pause size={16} fill=\"currentColor\" aria-hidden=\"true\" />
+              <Pause size={16} fill="currentColor" aria-hidden="true" />
             ) : (
-              <Play size={16} fill=\"currentColor\" className=\"ml-0.5\" aria-hidden=\"true\" />
+              <Play size={16} fill="currentColor" className="ml-0.5" aria-hidden="true" />
             )}
+>>>>>>> 5e383073471fad0218b57e53cab3e1541daa7c4f
           </button>
         </div>
 
-        <div className=\"flex items-center gap-3 text-xs text-muted-foreground\">
-          <span className=\"font-mono\">{fmt(current)}</span>
-          <div className=\"relative h-px flex-1 bg-foreground/15\">
+        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+          <span className="font-mono">{fmt(current)}</span>
+          <div className="relative h-px flex-1 bg-foreground/15">
             <div
-              className=\"absolute inset-y-0 left-0 bg-primary transition-[width] duration-100\"
+              className="absolute inset-y-0 left-0 bg-primary transition-[width] duration-100"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <span className=\"font-mono\">{fmt(duration)}</span>
+          <span className="font-mono">{fmt(duration)}</span>
         </div>
       </div>
     </article>
