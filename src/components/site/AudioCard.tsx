@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { Play, Pause } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Props {
   id: string;
@@ -21,7 +22,7 @@ function getMediaType(cover: string): "video" | "gif" | "image" {
   return "image";
 }
 
-export function AudioCard({ id, cover, posterFallback, title, occasion, src, objectPosition = "center bottom", isPlaying, onPlay, onPause }: Props) {
+export function AudioCard({ id, cover, posterFallback, title, occasion, src, objectPosition = "center 25%", isPlaying, onPlay, onPause }: Props) {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -30,7 +31,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
 
   const mediaType = getMediaType(cover);
 
-  // 1. Controle de tempo e progresso do áudio
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
@@ -55,18 +55,15 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
     };
   }, [id, onPause]);
 
-  // 2. Sincronização Play/Pause (Áudio e Vídeo juntos)
   useEffect(() => {
     const a = audioRef.current;
     const v = videoRef.current;
-
     if (isPlaying) {
       if (a) a.play().catch(() => {});
       if (v) v.play().catch(() => {});
     } else {
       if (a) a.pause();
       if (v) v.pause();
-      // REMOVIDO: qualquer lógica que resetava o vídeo ou subia o poster no pause
     }
   }, [isPlaying]);
 
@@ -86,26 +83,34 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
     <article className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full border border-foreground/5">
       {src && <audio ref={audioRef} src={src} preload="auto" loop />}
 
-      <div className="relative aspect-square overflow-hidden bg-muted">
+      <div className="relative w-full aspect-square overflow-hidden bg-muted">
         {mediaType === "video" && (
-          <video
-            ref={videoRef}
-            key={id}
-            src={cover}
-            muted
-            playsInline
-            loop
-            preload="auto"
-            aria-label={`Vídeo da composição ${title} — ${occasion}`}
-            className="absolute inset-0 block h-full w-full object-cover"
-            style={{ objectPosition }}
-            onLoadedData={(event) => {
-              const video = event.currentTarget;
-              if (!isPlaying && video.currentTime < 0.05) {
-                video.currentTime = 0.05;
-              }
-            }}
-          />
+          <>
+            <video
+              ref={videoRef}
+              key={id}
+              src={cover}
+              muted
+              playsInline
+              loop
+              preload="auto"
+              aria-label={`Vídeo da composição ${title} — ${occasion}`}
+              className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition }}
+            />
+            {posterFallback && (
+              <img
+                src={posterFallback}
+                alt=""
+                aria-hidden="true"
+                className={cn(
+                  "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
+                  isPlaying ? "opacity-0 pointer-events-none" : "opacity-100"
+                )}
+                style={{ objectPosition }}
+              />
+            )}
+          </>
         )}
 
         {mediaType === "gif" && (
@@ -115,6 +120,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
             loading="lazy"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
+            style={{ objectPosition }}
           />
         )}
 
@@ -124,7 +130,8 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
             alt={`Capa da composição ${title} — ${occasion}`}
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+            style={{ objectPosition }}
           />
         )}
       </div>
