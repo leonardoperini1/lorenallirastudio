@@ -1,3 +1,4 @@
+```tsx
 import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -20,52 +21,52 @@ import p6poster from "@/assets/portfolio-6-poster.png";
 
 const tracks = [
   {
-    id: \"rafaella\",
+    id: "rafaella",
     cover: p4,
     posterFallback: p4poster,
-    title: \"Rafaella\",
-    occasion: \"Debutante\",
-    src: \"/audio/rafaella.mp3\",
+    title: "Rafaella",
+    occasion: "Debutante",
+    src: "/audio/rafaella.mp3",
   },
   {
-    id: \"por-voce\",
+    id: "por-voce",
     cover: p6,
     posterFallback: p6poster,
-    title: \"Por você\",
-    occasion: \"Poesia musicada\",
-    src: \"/audio/por-voce.mp3\",
+    title: "Por você",
+    occasion: "Poesia musicada",
+    src: "/audio/por-voce.mp3",
   },
   {
-    id: \"casamento\",
+    id: "casamento",
     cover: p2,
     posterFallback: p2poster,
-    title: \"Casamento dos sonhos\",
-    occasion: \"Casamento\",
-    src: \"/audio/casamento-dos-sonhos.mp3\",
+    title: "Casamento dos sonhos",
+    occasion: "Casamento",
+    src: "/audio/casamento-dos-sonhos.mp3",
   },
   {
-    id: \"e-um-menino\",
+    id: "e-um-menino",
     cover: p5,
     posterFallback: p5poster,
-    title: \"É um menino!\",
-    occasion: \"Chá revelação\",
-    src: \"/audio/e-um-menino.mp3\",
+    title: "É um menino!",
+    occasion: "Chá revelação",
+    src: "/audio/e-um-menino.mp3",
   },
   {
-    id: \"eu-te-vi\",
+    id: "eu-te-vi",
     cover: p3,
     posterFallback: p3poster,
-    title: \"Eu te vi\",
-    occasion: \"Dia das mães\",
-    src: \"/audio/eu-te-vi.mp3\",
+    title: "Eu te vi",
+    occasion: "Dia das mães",
+    src: "/audio/eu-te-vi.mp3",
   },
   {
-    id: \"ll-vereadora\",
+    id: "ll-vereadora",
     cover: p1,
     posterFallback: p1poster,
-    title: \"LL para vereadora\",
-    occasion: \"Jingle\",
-    src: \"/audio/ll-para-vereadora.mp3\",
+    title: "LL para vereadora",
+    occasion: "Jingle",
+    src: "/audio/ll-para-vereadora.mp3",
   },
 ];
 
@@ -221,3 +222,4 @@ export function Portfolio() {
     </section>
   );
 }
+```
