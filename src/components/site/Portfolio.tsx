@@ -26,7 +26,6 @@ const tracks = [
     title: "Rafaella",
     occasion: "Debutante",
     src: "/audio/rafaella.mp3",
-    objectPosition: "center top",
   },
   {
     id: "por-voce",
@@ -67,7 +66,6 @@ const tracks = [
     title: "LL para vereadora",
     occasion: "Jingle",
     src: "/audio/ll-para-vereadora.mp3",
-    objectPosition: "center top",
   },
 ];
 
