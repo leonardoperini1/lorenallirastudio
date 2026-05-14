@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-// ANTIGRAVITY_SYNC_TOKEN: 2026-05-13_22:10
-=======
->>>>>>> 5e383073471fad0218b57e53cab3e1541daa7c4f
 import { useRef, useEffect, useState } from "react";
 import { Play, Pause } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -87,11 +83,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
     <article className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full border border-foreground/5">
       {src && <audio ref={audioRef} src={src} preload="auto" loop />}
 
-<<<<<<< HEAD
       <div className="relative w-full aspect-square overflow-hidden bg-muted">
-=======
-      <div className="relative aspect-square overflow-hidden bg-muted">
->>>>>>> 5e383073471fad0218b57e53cab3e1541daa7c4f
         {mediaType === "video" && (
           <>
             <video
@@ -102,6 +94,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
               playsInline
               loop
               preload="auto"
+              aria-label={`Vídeo da composição ${title} — ${occasion}`}
               className="absolute inset-0 h-full w-full object-cover"
               style={{ objectPosition }}
             />
@@ -109,6 +102,7 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
               <img
                 src={posterFallback}
                 alt=""
+                aria-hidden="true"
                 className={cn(
                   "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
                   isPlaying ? "opacity-0 pointer-events-none" : "opacity-100"
@@ -122,7 +116,9 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
         {mediaType === "gif" && (
           <img
             src={isPlaying ? cover : (posterFallback || cover)}
-            alt=""
+            alt={`Capa animada da composição ${title} — ${occasion}`}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
             style={{ objectPosition }}
           />
@@ -131,7 +127,9 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
         {mediaType === "image" && (
           <img
             src={cover}
-            alt=""
+            alt={`Capa da composição ${title} — ${occasion}`}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
             style={{ objectPosition }}
           />
@@ -146,11 +144,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
           </div>
           <button
             onClick={toggle}
-<<<<<<< HEAD
-            className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
-          >
-            {isPlaying ? <Pause size={16} fill="currentColor" /> : <Play size={16} fill="currentColor" className="ml-0.5" />}
-=======
             aria-label={isPlaying ? `Pausar ${title}` : `Tocar composição ${title}`}
             aria-pressed={isPlaying}
             className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background transition-transform duration-300 hover:scale-110"
@@ -160,7 +153,6 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
             ) : (
               <Play size={16} fill="currentColor" className="ml-0.5" aria-hidden="true" />
             )}
->>>>>>> 5e383073471fad0218b57e53cab3e1541daa7c4f
           </button>
         </div>
 
