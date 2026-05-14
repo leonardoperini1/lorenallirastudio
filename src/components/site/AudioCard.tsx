@@ -92,15 +92,19 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
             ref={videoRef}
             key={id}
             src={cover}
-            poster={posterFallback}
             muted
             playsInline
             loop
-            autoPlay
             preload="auto"
             aria-label={`Vídeo da composição ${title} — ${occasion}`}
-            className="h-full w-full object-cover"
+            className="absolute inset-0 block h-full w-full object-cover"
             style={{ objectPosition }}
+            onLoadedData={(event) => {
+              const video = event.currentTarget;
+              if (!isPlaying && video.currentTime < 0.05) {
+                video.currentTime = 0.05;
+              }
+            }}
           />
         )}
 
