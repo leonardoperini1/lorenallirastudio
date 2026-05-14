@@ -21,7 +21,7 @@ function getMediaType(cover: string): "video" | "gif" | "image" {
   return "image";
 }
 
-export function AudioCard({ id, cover, posterFallback, title, occasion, src, objectPosition = "center 25%", isPlaying, onPlay, onPause }: Props) {
+export function AudioCard({ id, cover, posterFallback, title, occasion, src, objectPosition = "center bottom", isPlaying, onPlay, onPause }: Props) {
   const [progress, setProgress] = useState(0);
   const [current, setCurrent] = useState(0);
   const [duration, setDuration] = useState(0);
