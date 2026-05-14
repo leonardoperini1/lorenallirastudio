@@ -83,57 +83,60 @@ export function AudioCard({ id, cover, posterFallback, title, occasion, src, obj
     <article className="group relative overflow-hidden rounded-2xl bg-card transition-all duration-500 hover:-translate-y-1.5 h-full border border-foreground/5">
       {src && <audio ref={audioRef} src={src} preload="auto" loop />}
 
-      <div className="relative w-full aspect-square overflow-hidden bg-muted">
-        {mediaType === "video" && (
-          <>
-            <video
-              ref={videoRef}
-              key={id}
-              src={cover}
-              muted
-              playsInline
-              loop
-              preload="auto"
-              aria-label={`Vídeo da composição ${title} — ${occasion}`}
-              className="absolute inset-0 h-full w-full object-cover"
-              style={{ objectPosition }}
-            />
-            {posterFallback && (
-              <img
-                src={posterFallback}
-                alt=""
-                aria-hidden="true"
-                className={cn(
-                  "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
-                  isPlaying ? "opacity-0 pointer-events-none" : "opacity-100"
-                )}
+      {/* Container de Mídia - Técnica de Padding para Quadrado Perfeito Inquebrável */}
+      <div className="relative w-full h-0 pb-[100%] overflow-hidden bg-muted">
+        <div className="absolute inset-0">
+          {mediaType === "video" && (
+            <>
+              <video
+                ref={videoRef}
+                key={id}
+                src={cover}
+                muted
+                playsInline
+                loop
+                preload="auto"
+                aria-label={`Vídeo da composição ${title} — ${occasion}`}
+                className="h-full w-full object-cover"
                 style={{ objectPosition }}
               />
-            )}
-          </>
-        )}
+              {posterFallback && (
+                <img
+                  src={posterFallback}
+                  alt=""
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute inset-0 h-full w-full object-cover transition-opacity duration-500",
+                    isPlaying ? "opacity-0 pointer-events-none" : "opacity-100"
+                  )}
+                  style={{ objectPosition }}
+                />
+              )}
+            </>
+          )}
 
-        {mediaType === "gif" && (
-          <img
-            src={isPlaying ? cover : (posterFallback || cover)}
-            alt={`Capa animada da composição ${title} — ${occasion}`}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ objectPosition }}
-          />
-        )}
+          {mediaType === "gif" && (
+            <img
+              src={isPlaying ? cover : (posterFallback || cover)}
+              alt={`Capa animada da composição ${title} — ${occasion}`}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover"
+              style={{ objectPosition }}
+            />
+          )}
 
-        {mediaType === "image" && (
-          <img
-            src={cover}
-            alt={`Capa da composição ${title} — ${occasion}`}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
-            style={{ objectPosition }}
-          />
-        )}
+          {mediaType === "image" && (
+            <img
+              src={cover}
+              alt={`Capa da composição ${title} — ${occasion}`}
+              loading="lazy"
+              decoding="async"
+              className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+              style={{ objectPosition }}
+            />
+          )}
+        </div>
       </div>
 
       <div className="p-6">
