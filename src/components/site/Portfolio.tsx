@@ -1,4 +1,3 @@
-```tsx
 import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -215,4 +214,3 @@ export function Portfolio() {
     </section>
   );
 }
-```
